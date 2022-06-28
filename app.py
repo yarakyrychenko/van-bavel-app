@@ -25,10 +25,17 @@ def run_query(query):
     rows = rows.fetchall()
     return rows
 
+def add_row(query):
+    conn.execute(query, headers=1)
+    
+
 sheet_url = st.secrets["private_gsheets_url"]
+add_row(f"""
+    INSERT INTO "{sheet_url}"
+    VALUES ('1', {st.session_state.name}, 'rep', 'star')""")
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
-# Print results.
+
 for row in rows:
     st.write(f"{row.i_am} has a :{row.i_am}:")
 
