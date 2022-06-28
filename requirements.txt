@@ -1,4 +1,4 @@
-shillelagh
+gsheetsdb
 streamlit
 matplotlib
 tweepy
