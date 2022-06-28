@@ -1,0 +1,6 @@
+gsheetsdb
+streamlit
+matplotlib
+tweepy
+regex
+wordcloud
