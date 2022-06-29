@@ -1,5 +1,7 @@
 import streamlit as st
 from shillelagh.backends.apsw.db import connect
+from datetime import datetime
+from uuid import uuid4
 
 st.title(" Are you partisan? ") 
 st.subheader("See how you and other twitter users see each party visualized in wordclouds ")
@@ -23,7 +25,8 @@ st.session_state.rep_words = ", ".join(rep_words)
 st.text(f"your words are {st.session_state.rep_words}")
 
 if st.button("Submit", key='submit'):
-# Create a connection object.
+    st.session_state.id = datetime.now().strftime('%Y%m-%d%H-%M-') + str(uuid4())
+
     conn = connect(":memory:", 
                adapter_kwargs = {
                    "gsheetsapi": { 
@@ -35,8 +38,8 @@ if st.button("Submit", key='submit'):
     sheet_url = st.secrets["private_gsheets_url"]
     query = f'SELECT * FROM "{sheet_url}"'
     insert = f"""
-            INSERT INTO "{sheet_url}" (id, twitter_username, party, i_am)
-            VALUES (3, "{st.session_state.name}", "{st.session_state.party}", "{st.session_state.dem_words}")
+            INSERT INTO "{sheet_url}" (id, twitter_username, party, dem_words, rep_words)
+            VALUES ("{st.session_state.id}", "{st.session_state.name}", "{st.session_state.party}", "{st.session_state.dem_words}", "{st.session_state.rep_words}")
             """
 
     conn.execute(insert)
