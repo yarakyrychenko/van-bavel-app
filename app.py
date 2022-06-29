@@ -47,8 +47,8 @@ if st.button("Submit", key='submit'):
     all_dem_words = []
     all_rep_words = []
     for row in conn.execute(query):
-        all_dem_words.append(row[4])
-        all_rep_words.append(row[5])
+        all_dem_words.append(row[3])
+        all_rep_words.append(row[4])
 
     from wordcloud import WordCloud
     import matplotlib.pyplot as plt
