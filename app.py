@@ -63,7 +63,7 @@ if st.button("Submit", key='submit'):
 
     fig, ax = plt.subplots(figsize=(15,12))
 
-    ax.set_title('Words Considered Negative by Human and Harvard Inquirer Dictionary', fontsize=20)
+    ax.set_title('Words People Think Describe Republicans and Democrats', fontsize=20)
     v = venn2_wordcloud([set(all_rep_words), set(all_dem_words)],
                     set_colors=['red', 'blue'],
                     set_edgecolors=['w', 'w'],
