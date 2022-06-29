@@ -2,6 +2,7 @@ import streamlit as st
 from shillelagh.backends.apsw.db import connect
 from datetime import datetime
 from uuid import uuid4
+import collections
 
 st.title(" 🇺🇸 America divided? 🇺🇸 ") 
 st.subheader("See how people described party members with wordclouds.")
@@ -59,12 +60,17 @@ if st.button("Submit", key='submit'):
         all_rep_words.append(row[4])
 
     all_dem_words = ", ".join(all_dem_words)
-    all_dem_words = all_dem_words.split(", ")
     all_rep_words = ", ".join(all_rep_words)
+    all_words = all_rep_words +", " + all_dem_words
+    all_dem_words = all_dem_words.split(", ")
     all_rep_words = all_rep_words.split(", ")
 
+    n_show = 200
+    counter=collections.Counter(all_words.split(", "))
+    freq_dict = {word: freq/n_show for word, freq in counter.most_common(n_show)}
+    all_dem_words = [ word for word in all_dem_words if word in freq_dict.keys() ]        
+    rep_dem_words = [ word for word in all_rep_words if word in freq_dict.keys() ]        
 
-    from wordcloud import WordCloud
     import matplotlib.pyplot as plt
     from matplotlib_venn_wordcloud import venn2_wordcloud
 
@@ -75,8 +81,8 @@ if st.button("Submit", key='submit'):
                     set_colors=['red', 'blue'],
                     set_edgecolors=['w', 'w'],
                     alpha = .2,
-                    ax=ax, set_labels=['Republican', 'Democrat'])
-                    #word_to_frequency=all_pos_freq
+                    ax=ax, set_labels=['Republican', 'Democrat'],
+                    word_to_frequency=freq_dict )
     # add color
     #v.get_patch_by_id('10').set_color('red')
     #v.get_patch_by_id('10').set_alpha(0.4)
@@ -91,7 +97,7 @@ if st.button("Submit", key='submit'):
     components.html(
     """
         <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" 
-        data-text="Check out this app 🇺🇸🎈" 
+        data-text="Check out this app about the American politics 🇺🇸" 
         data-url="https://share.streamlit.io/yarakyrychenko/van-bavel-app/main/app.py"
         data-show-count="false">
         data-size="Large" 
