@@ -83,8 +83,8 @@ if st.button("Submit", key='submit'):
                     set_colors=['red', 'blue'],
                     set_edgecolors=['w', 'w'],
                     alpha = .2,
-                    ax=ax, set_labels=['Republican', 'Democrat'],
-                    word_to_frequency=freq_dict )
+                    ax=ax, set_labels=['Republican', 'Democrat'])
+                    #word_to_frequency=freq_dict )
     # add color
     #v.get_patch_by_id('10').set_color('red')
     #v.get_patch_by_id('10').set_alpha(0.4)
