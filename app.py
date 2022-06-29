@@ -65,13 +65,11 @@ if st.button("Submit", key='submit'):
     all_dem_words = all_dem_words.split(", ")
     all_rep_words = all_rep_words.split(", ")
 
-    n_show = 200
+    n_show = len(all_words.split(", ")) if len(all_words.split(", ")) < 200 else 200
     counter=collections.Counter(all_words.split(", "))
     freq_dict = {word: freq/n_show for word, freq in counter.most_common(n_show)}
-    st.write(counter.most_common(n_show))
-    st.write(freq_dict)
-    #all_dem_words = [ word for word in all_dem_words if word in freq_dict.keys() ]        
-    #rep_dem_words = [ word for word in all_rep_words if word in freq_dict.keys() ]        
+    all_dem_words = [ word for word in all_dem_words if word in list(freq_dict.keys()) ]        
+    rep_dem_words = [ word for word in all_rep_words if word in list(freq_dict.keys()) ]        
 
     import matplotlib.pyplot as plt
     from matplotlib_venn_wordcloud import venn2_wordcloud
@@ -83,8 +81,8 @@ if st.button("Submit", key='submit'):
                     set_colors=['red', 'blue'],
                     set_edgecolors=['w', 'w'],
                     alpha = .2,
-                    ax=ax, set_labels=['Republican', 'Democrat'])
-                    #word_to_frequency=freq_dict )
+                    ax=ax, set_labels=['Republican', 'Democrat'],
+                    word_to_frequency=freq_dict )
     # add color
     #v.get_patch_by_id('10').set_color('red')
     #v.get_patch_by_id('10').set_alpha(0.4)
