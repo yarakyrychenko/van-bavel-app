@@ -10,7 +10,7 @@ credentials = service_account.Credentials.from_service_account_info(
 )
 
 # Create a connection object.
-conn = connect(credentials=credentials)
+conn = connect(adapter_kwargs=credentials)
 
 sheet_url = st.secrets["public_gsheets_url"]
 query = f'SELECT * FROM "{sheet_url}"'
