@@ -4,3 +4,4 @@ uuid
 matplotlib-venn-wordcloud
 wordcloud
 matplotlib
+streamlit-disqus

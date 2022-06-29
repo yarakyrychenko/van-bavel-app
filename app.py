@@ -2,6 +2,7 @@ import streamlit as st
 from shillelagh.backends.apsw.db import connect
 from datetime import datetime
 from uuid import uuid4
+from streamlit_disqus import st_disqus
 
 st.title(" 🇺🇸 America divided? 🇺🇸 ") 
 st.subheader("See how people described party members with wordclouds.")
@@ -85,5 +86,7 @@ if st.button("Submit", key='submit'):
     v.get_patch_by_id('11').set_color('purple')
     v.get_patch_by_id('11').set_alpha(0.2)
     st.pyplot(fig)
+
+    st_disqus("streamlit-disqus-demo")
 
 
