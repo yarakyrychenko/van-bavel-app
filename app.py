@@ -15,14 +15,14 @@ st.subheader("Please add five words that describe Democrats best in your opinion
 for i in range(5):
     dem_words.append(st.text_input("D"+str(i+1)))
 st.session_state.dem_words = ", ".join(dem_words)
-st.subheader(f"Your words are {st.session_state.dem_words}")
+st.markdown(f"Your words are {st.session_state.dem_words}")
 
 rep_words = []
 st.subheader("Please add five words that describe Republicans best in your opinion:")
 for i in range(5):
     rep_words.append(st.text_input("R"+str(i+1),key = "R"+str(i+1)))
 st.session_state.rep_words = ", ".join(rep_words)
-st.subheader(f"Your words are {st.session_state.rep_words}")
+st.markdown(f"Your words are {st.session_state.rep_words}")
 
 if st.button("Submit", key='submit'):
     st.session_state.id = datetime.now().strftime('%Y%m-%d%H-%M-') + str(uuid4())
