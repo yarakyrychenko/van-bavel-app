@@ -3,8 +3,8 @@ from shillelagh.backends.apsw.db import connect
 from datetime import datetime
 from uuid import uuid4
 
-st.title(" America divided? ") 
-st.header("See how you and other twitter users see each party visualized in wordclouds ")
+st.title(" 🇺🇸 America divided? 🇺🇸 ") 
+st.header("See how people described two party members with wordclouds.")
 st.text_input("Enter your twitter username", key="name")
 
 dem_words = []
@@ -12,14 +12,16 @@ st.subheader("Please add five words that describe Democrats best")
 for i in range(5):
     dem_words.append(st.text_input("D"+str(i+1)))
 st.session_state.dem_words = ", ".join(dem_words).lower()
-st.markdown(f"Your words are {st.session_state.dem_words}.")
+if dem_words[4] != "":
+    st.markdown(f"Your words are {st.session_state.dem_words}.")
 
 rep_words = []
 st.subheader("Please add five words that describe Republicans best")
 for i in range(5):
     rep_words.append(st.text_input("R"+str(i+1),key = "R"+str(i+1)))
 st.session_state.rep_words = ", ".join(rep_words).lower()
-st.markdown(f"Your words are {st.session_state.rep_words}.")
+if rep_words[4] != "":
+    st.markdown(f"Your words are {st.session_state.rep_words}.")
 
 st.subheader("Feeling Thermomether")
 st.slider("How warm do you feel about Democrats (0 = coldest rating; 100 = warmest rating)?", 
