@@ -51,6 +51,11 @@ if st.button("Submit", key='submit'):
         all_rep_words.append(row[4])
     st.text(str(all_dem_words))
     st.text(str(all_rep_words))
+    all_dem_words = ", ".join(all_dem_words)
+    all_dem_words = all_dem_words.split(", ")
+    all_rep_words = ", ".join(all_rep_words)
+    all_rep_words = all_rep_words.split(", ")
+
 
     from wordcloud import WordCloud
     import matplotlib.pyplot as plt
@@ -70,8 +75,8 @@ if st.button("Submit", key='submit'):
     #v.get_patch_by_id('10').set_alpha(0.4)
     #v.get_patch_by_id('01').set_color('blue')
     #v.get_patch_by_id('01').set_alpha(0.4)
-    #v.get_patch_by_id('11').set_color('purple')
-    #v.get_patch_by_id('11').set_alpha(0.2)
+    v.get_patch_by_id('11').set_color('purple')
+    v.get_patch_by_id('11').set_alpha(0.2)
     st.pyplot(fig)
 
 
