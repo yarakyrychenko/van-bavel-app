@@ -6,7 +6,7 @@ st.subheader("See how you and other twitter users see each party visualized in w
 st.text_input("Enter a twitter username to begin", key="name")
 st.session_state.party = st.radio(
      "Which party do you identify with?",
-     ('Republican', 'Democratic', 'Independant'))
+     ('Independant','Republican', 'Democratic'))
 
 dem_words = []
 st.text("Please add ten words that describe Democrats best in your opinion:")
@@ -21,9 +21,10 @@ for i in range(5):
     rep_words.append(st.text_input("R"+str(i+1)))
 st.session_state.rep_words = ",".join(rep_words)
 st.text(f"your words are {rep_words}")
-       
+
+if "rep_words" in st.session_state:
 # Create a connection object.
-conn = connect(":memory:", 
+    conn = connect(":memory:", 
                adapter_kwargs = {
                    "gsheetsapi": { 
                        "service_account_info":  st.secrets["gcp_service_account"] 
@@ -31,13 +32,13 @@ conn = connect(":memory:",
                                     }
     )
 
-sheet_url = st.secrets["private_gsheets_url"]
-query = f'SELECT * FROM "{sheet_url}"'
-insert = f"""INSERT INTO "{sheet_url}" 
-            VALUES (1, {st.session_state.name}, {st.session_state.party}, {st.session_state.dem_words})
-"""
-# Print results.
-conn.execute(insert)
+    sheet_url = st.secrets["private_gsheets_url"]
+    query = f'SELECT * FROM "{sheet_url}"'
+    insert = f"""INSERT INTO "{sheet_url}" (id, twitter_username, party, i_am)
+            VALUES (3, {st.session_state.name}, {st.session_state.party}, {st.session_state.dem_words})
+    """
 
-for row in conn.execute(query):
-    st.write(f"{row}")
+    conn.execute(insert)
+
+    for row in conn.execute(query):
+        st.write(f"{row}")
