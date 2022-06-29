@@ -18,7 +18,7 @@ conn = connect(":memory:",
                                     }
     )
 
-sheet_url = st.secrets["public_gsheets_url"]
+sheet_url = st.secrets["private_gsheets_url"]
 query = f'SELECT * FROM "{sheet_url}"'
 insert = f"""INSERT INTO "{sheet_url}" 
             VALUES (1, 'no', 'dem', 'rabbit')
