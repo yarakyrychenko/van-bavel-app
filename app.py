@@ -10,8 +10,12 @@ credentials = service_account.Credentials.from_service_account_info(
 )
 
 # Create a connection object.
-conn = connect(":memory:", adapter_kwargs={"gsheetaspi": { 
-    "service_account_info":  st.secrets["gcp_service_account"] }
+conn = connect(":memory:", 
+               adapter_kwargs = {
+                   "gsheetaspi": { 
+                       "service_account_info":  st.secrets["gcp_service_account"] 
+                                   }
+                                    }
     )
 
 sheet_url = st.secrets["public_gsheets_url"]
