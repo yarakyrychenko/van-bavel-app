@@ -12,17 +12,17 @@ dem_words = []
 st.text("Please add ten words that describe Democrats best in your opinion:")
 for i in range(5):
     dem_words.append(st.text_input("D"+str(i+1)))
-st.session_state.dem_words = ",".join(dem_words)
-st.text(f"your words are {dem_words}")
+st.session_state.dem_words = ", ".join(dem_words)
+st.text(f"your words are {st.session_state.dem_words}")
 
 rep_words = []
 st.text("Please add ten words that describe Republicans best in your opinion:")
 for i in range(5):
     rep_words.append(st.text_input("R"+str(i+1)))
-st.session_state.rep_words = ",".join(rep_words)
-st.text(f"your words are {rep_words}")
+st.session_state.rep_words = ", ".join(rep_words)
+st.text(f"your words are {st.session_state.rep_words}")
 
-if "rep_words" in st.session_state:
+if "R5" in st.session_state:
 # Create a connection object.
     conn = connect(":memory:", 
                adapter_kwargs = {
