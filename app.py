@@ -109,7 +109,7 @@ if submitted:
         """
             )
     else:
-        st.write("Please fill out every field of the form and try again.")
+        st.error("Please fill out every field of the form and try again.")
 
 
 
