@@ -37,10 +37,10 @@ with st.form("my_form"):
     
     submitted = st.form_submit_button("Submit")
 
-    if submitted:
-        st.session_state.id = datetime.now().strftime('%Y%m-%d%H-%M-') + str(uuid4())
+if submitted:
+    st.session_state.id = datetime.now().strftime('%Y%m-%d%H-%M-') + str(uuid4())
 
-        conn = connect(":memory:", 
+    conn = connect(":memory:", 
                adapter_kwargs = {
                    "gsheetsapi": { 
                        "service_account_info":  st.secrets["gcp_service_account"] 
@@ -48,57 +48,57 @@ with st.form("my_form"):
                                     }
         )
 
-        sheet_url = st.secrets["private_gsheets_url"]
-        query = f'SELECT * FROM "{sheet_url}"'
-        insert = f"""
+    sheet_url = st.secrets["private_gsheets_url"]
+    query = f'SELECT * FROM "{sheet_url}"'
+    insert = f"""
             INSERT INTO "{sheet_url}" (id, twitter_username, party, dem_words, rep_words, dem_temp, rep_temp)
             VALUES ("{st.session_state.id}", "{st.session_state.name}", "{st.session_state.party}", "{st.session_state.dem_words}", "{st.session_state.rep_words}", "{st.session_state.dem_temp}","{st.session_state.rep_temp}")
             """
 
-        conn.execute(insert)
+    conn.execute(insert)
 
-        all_dem_words = []
-        all_rep_words = []
-        for row in conn.execute(query):
-            all_dem_words.append(row[3])
-            all_rep_words.append(row[4])
+    all_dem_words = []
+    all_rep_words = []
+    for row in conn.execute(query):
+        all_dem_words.append(row[3])
+        all_rep_words.append(row[4])
 
-        all_dem_words = ", ".join(all_dem_words)
-        all_rep_words = ", ".join(all_rep_words)
-        all_words = all_rep_words +", " + all_dem_words
-        all_dem_words = all_dem_words.split(", ")
-        all_rep_words = all_rep_words.split(", ")
+    all_dem_words = ", ".join(all_dem_words)
+    all_rep_words = ", ".join(all_rep_words)
+    all_words = all_rep_words +", " + all_dem_words
+    all_dem_words = all_dem_words.split(", ")
+    all_rep_words = all_rep_words.split(", ")
 
-        n_show = len(all_words.split(", ")) if len(all_words.split(", ")) < 100 else 100
-        counter=collections.Counter([word for word in all_words.split(", ") if word != ""])
-        freq_dict = {item[0]: item[1] for item in counter.most_common(n_show)}
-        all_dem_words = [ word for word in all_dem_words if word in list(freq_dict.keys()) ]        
-        rep_dem_words = [ word for word in all_rep_words if word in list(freq_dict.keys()) ]   
+    n_show = len(all_words.split(", ")) if len(all_words.split(", ")) < 100 else 100
+    counter=collections.Counter([word for word in all_words.split(", ") if word != ""])
+    freq_dict = {item[0]: item[1] for item in counter.most_common(n_show)}
+    all_dem_words = [ word for word in all_dem_words if word in list(freq_dict.keys()) ]        
+   rep_dem_words = [ word for word in all_rep_words if word in list(freq_dict.keys()) ]   
 
-        import matplotlib.pyplot as plt
-        from matplotlib_venn_wordcloud import venn2_wordcloud
+    import matplotlib.pyplot as plt
+    from matplotlib_venn_wordcloud import venn2_wordcloud
 
-        fig, ax = plt.subplots(figsize=(15,12))
+    fig, ax = plt.subplots(figsize=(15,12))
 
-        ax.set_title('Words People Think Describe Republicans and Democrats', fontsize=20)
-        v = venn2_wordcloud([set(all_rep_words), set(all_dem_words)],
+    ax.set_title('Words People Think Describe Republicans and Democrats', fontsize=20)
+    v = venn2_wordcloud([set(all_rep_words), set(all_dem_words)],
                     set_colors=['red', 'blue'],
                     set_edgecolors=['w', 'w'],
                     alpha = .2,
                     ax=ax, set_labels=['Republican', 'Democrat'])
                     #word_to_frequency=freq_dict )
-        # add color
-        #v.get_patch_by_id('10').set_color('red')
-        #v.get_patch_by_id('10').set_alpha(0.4)
-        #v.get_patch_by_id('01').set_color('blue')
-        #v.get_patch_by_id('01').set_alpha(0.4)
-        v.get_patch_by_id('11').set_color('purple')
-        v.get_patch_by_id('11').set_alpha(0.2)
-        st.pyplot(fig)
+    # add color
+    #v.get_patch_by_id('10').set_color('red')
+    #v.get_patch_by_id('10').set_alpha(0.4)
+    #v.get_patch_by_id('01').set_color('blue')
+    #v.get_patch_by_id('01').set_alpha(0.4)
+    v.get_patch_by_id('11').set_color('purple')
+    v.get_patch_by_id('11').set_alpha(0.2)
+    st.pyplot(fig)
 
-        import streamlit.components.v1 as components
+    import streamlit.components.v1 as components
 
-        components.html(
+    components.html(
         """
             <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" 
             data-text="Check out this app about the American politics 🇺🇸" 
