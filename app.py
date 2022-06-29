@@ -11,23 +11,23 @@ st.session_state.party = st.radio(
      ('Independant','Republican', 'Democrat'))
 
 st.subheader("Feeling Thermomether")
-st.slider("How warm do you feel about Republicans (0 = coldest rating; 100 = warmest rating)?", 
-    min_value=0, max_value=100, value=50, step=1,key="rep_temp")  
 st.slider("How warm do you feel about Democrats (0 = coldest rating; 100 = warmest rating)?", 
     min_value=0, max_value=100, value=50, step=1,key="dem_temp")          
+st.slider("How warm do you feel about Republicans (0 = coldest rating; 100 = warmest rating)?", 
+    min_value=0, max_value=100, value=50, step=1,key="rep_temp")  
 
 dem_words = []
-st.subheader("Please add five words that describe Democrats best:")
+st.subheader("Please add five words that describe Democrats best")
 for i in range(5):
     dem_words.append(st.text_input("D"+str(i+1)))
-st.session_state.dem_words = ", ".join(dem_words)
+st.session_state.dem_words = ", ".join(dem_words).lower()
 st.markdown(f"Your words are {st.session_state.dem_words}.")
 
 rep_words = []
-st.subheader("Please add five words that describe Republicans best:")
+st.subheader("Please add five words that describe Republicans best")
 for i in range(5):
     rep_words.append(st.text_input("R"+str(i+1),key = "R"+str(i+1)))
-st.session_state.rep_words = ", ".join(rep_words)
+st.session_state.rep_words = ", ".join(rep_words).lower()
 st.markdown(f"Your words are {st.session_state.rep_words}.")
 
 if st.button("Submit", key='submit'):
@@ -44,8 +44,8 @@ if st.button("Submit", key='submit'):
     sheet_url = st.secrets["private_gsheets_url"]
     query = f'SELECT * FROM "{sheet_url}"'
     insert = f"""
-            INSERT INTO "{sheet_url}" (id, twitter_username, party, dem_words, rep_words)
-            VALUES ("{st.session_state.id}", "{st.session_state.name}", "{st.session_state.party}", "{st.session_state.dem_words}", "{st.session_state.rep_words}")
+            INSERT INTO "{sheet_url}" (id, twitter_username, party, dem_words, rep_words, dem_temp, rep_temp)
+            VALUES ("{st.session_state.id}", "{st.session_state.name}", "{st.session_state.party}", "{st.session_state.dem_words}", "{st.session_state.rep_words}", "{st.session_state.dem_temp}","{st.session_state.rep_temp}")
             """
 
     conn.execute(insert)
