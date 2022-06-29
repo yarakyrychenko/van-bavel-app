@@ -6,19 +6,21 @@ st.subheader("See how you and other twitter users see each party visualized in w
 st.text_input("Enter a twitter username to begin", key="name")
 st.session_state.party = st.radio(
      "Which party do you identify with?",
-     ('Republican', 'Democratic'))
+     ('Republican', 'Democratic', 'Independant'))
 
 dem_words = []
-st.text("Please add ten words that describe Democrats best in your opinion below:")
+st.text("Please add ten words that describe Democrats best in your opinion:")
 for i in range(5):
     dem_words.append(st.text_input("D"+str(i+1)))
 st.session_state.dem_words = ",".join(dem_words)
+st.text(f"your words are {dem_words}")
 
 rep_words = []
-st.text("Please add ten words that describe Democrats best in your opinion below:")
+st.text("Please add ten words that describe Republicans best in your opinion:")
 for i in range(5):
     rep_words.append(st.text_input("R"+str(i+1)))
 st.session_state.rep_words = ",".join(rep_words)
+st.text(f"your words are {rep_words}")
        
 # Create a connection object.
 conn = connect(":memory:", 
