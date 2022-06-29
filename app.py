@@ -15,16 +15,12 @@ with st.form("my_form"):
     for i in range(5):
         dem_words.append(st.text_input("D"+str(i+1)))
     st.session_state.dem_words = ", ".join(dem_words).lower()
-    if dem_words[4] != "":
-        st.markdown(f"Your words are {st.session_state.dem_words}.")
 
     rep_words = []
     st.subheader("Please add five words that describe Republicans best")
     for i in range(5):
         rep_words.append(st.text_input("R"+str(i+1),key = "R"+str(i+1)))
     st.session_state.rep_words = ", ".join(rep_words).lower()
-    if rep_words[4] != "":
-        st.markdown(f"Your words are {st.session_state.rep_words}.")
 
     st.subheader("Feeling Thermomether")
     st.slider("How warm do you feel about Democrats (0 = coldest rating; 100 = warmest rating)?", 
@@ -55,33 +51,34 @@ if submitted:
             VALUES ("{st.session_state.id}", "{st.session_state.name}", "{st.session_state.party}", "{st.session_state.dem_words}", "{st.session_state.rep_words}", "{st.session_state.dem_temp}","{st.session_state.rep_temp}")
             """
 
-    conn.execute(insert)
+    if st.session_state.rep_words[4] != "":
+        conn.execute(insert)
 
-    all_dem_words = []
-    all_rep_words = []
-    for row in conn.execute(query):
-        all_dem_words.append(row[3])
-        all_rep_words.append(row[4])
+        all_dem_words = []
+        all_rep_words = []
+        for row in conn.execute(query):
+            all_dem_words.append(row[3])
+            all_rep_words.append(row[4])
 
-    all_dem_words = ", ".join(all_dem_words)
-    all_rep_words = ", ".join(all_rep_words)
-    all_words = all_rep_words +", " + all_dem_words
-    all_dem_words = all_dem_words.split(", ")
-    all_rep_words = all_rep_words.split(", ")
+        all_dem_words = ", ".join(all_dem_words)
+        all_rep_words = ", ".join(all_rep_words)
+        all_words = all_rep_words +", " + all_dem_words
+        all_dem_words = all_dem_words.split(", ")
+        all_rep_words = all_rep_words.split(", ")
 
-    n_show = len(all_words.split(", ")) if len(all_words.split(", ")) < 100 else 100
-    counter=collections.Counter([word for word in all_words.split(", ") if word != ""])
-    freq_dict = {item[0]: item[1] for item in counter.most_common(n_show)}
-    all_dem_words = [ word for word in all_dem_words if word in list(freq_dict.keys()) ]        
-    rep_dem_words = [ word for word in all_rep_words if word in list(freq_dict.keys()) ]   
+        n_show = len(all_words.split(", ")) if len(all_words.split(", ")) < 100 else 100
+        counter=collections.Counter([word for word in all_words.split(", ") if word != ""])
+        freq_dict = {item[0]: item[1] for item in counter.most_common(n_show)}
+        all_dem_words = [ word for word in all_dem_words if word in list(freq_dict.keys()) ]        
+        rep_dem_words = [ word for word in all_rep_words if word in list(freq_dict.keys()) ]   
 
-    import matplotlib.pyplot as plt
-    from matplotlib_venn_wordcloud import venn2_wordcloud
+        import matplotlib.pyplot as plt
+        from matplotlib_venn_wordcloud import venn2_wordcloud
 
-    fig, ax = plt.subplots(figsize=(15,12))
+        fig, ax = plt.subplots(figsize=(15,12))
 
-    ax.set_title('Words People Think Describe Republicans and Democrats', fontsize=20)
-    v = venn2_wordcloud([set(all_rep_words), set(all_dem_words)],
+        ax.set_title('Words People Think Describe Republicans and Democrats', fontsize=20)
+        v = venn2_wordcloud([set(all_rep_words), set(all_dem_words)],
                     set_colors=['red', 'blue'],
                     set_edgecolors=['w', 'w'],
                     alpha = .2,
@@ -92,13 +89,13 @@ if submitted:
     #v.get_patch_by_id('10').set_alpha(0.4)
     #v.get_patch_by_id('01').set_color('blue')
     #v.get_patch_by_id('01').set_alpha(0.4)
-    v.get_patch_by_id('11').set_color('purple')
-    v.get_patch_by_id('11').set_alpha(0.2)
-    st.pyplot(fig)
+        v.get_patch_by_id('11').set_color('purple')
+        v.get_patch_by_id('11').set_alpha(0.2)
+        st.pyplot(fig)
 
-    import streamlit.components.v1 as components
+        import streamlit.components.v1 as components
 
-    components.html(
+        components.html(
         """
             <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" 
             data-text="Check out this app about the American politics 🇺🇸" 
@@ -111,7 +108,8 @@ if submitted:
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         """
             )
-
+    else:
+        st.write("Please fill out every field of the form and try again.")
 
 
 
