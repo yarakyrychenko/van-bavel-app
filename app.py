@@ -73,7 +73,7 @@ if submitted:
     counter=collections.Counter([word for word in all_words.split(", ") if word != ""])
     freq_dict = {item[0]: item[1] for item in counter.most_common(n_show)}
     all_dem_words = [ word for word in all_dem_words if word in list(freq_dict.keys()) ]        
-   rep_dem_words = [ word for word in all_rep_words if word in list(freq_dict.keys()) ]   
+    rep_dem_words = [ word for word in all_rep_words if word in list(freq_dict.keys()) ]   
 
     import matplotlib.pyplot as plt
     from matplotlib_venn_wordcloud import venn2_wordcloud
