@@ -21,9 +21,8 @@ for i in range(5):
     rep_words.append(st.text_input("R"+str(i+1),key = "R"+str(i+1)))
 st.session_state.rep_words = ", ".join(rep_words)
 st.text(f"your words are {st.session_state.rep_words}")
-st.button("Submit", key='submit')
 
-if "submit" in st.session_state:
+if st.button("Submit", key='submit'):
 # Create a connection object.
     conn = connect(":memory:", 
                adapter_kwargs = {
