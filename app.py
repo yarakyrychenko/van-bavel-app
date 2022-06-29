@@ -65,9 +65,11 @@ if st.button("Submit", key='submit'):
     all_dem_words = all_dem_words.split(", ")
     all_rep_words = all_rep_words.split(", ")
 
-    #n_show = 200
-    #counter=collections.Counter(all_words.split(", "))
-    #freq_dict = {word: freq/n_show for word, freq in counter.most_common(n_show)}
+    n_show = 200
+    counter=collections.Counter(all_words.split(", "))
+    freq_dict = {word: freq/n_show for word, freq in counter.most_common(n_show)}
+    st.write(counter.most_common(n_show))
+    st.write(freq_dict)
     #all_dem_words = [ word for word in all_dem_words if word in freq_dict.keys() ]        
     #rep_dem_words = [ word for word in all_rep_words if word in freq_dict.keys() ]        
 
