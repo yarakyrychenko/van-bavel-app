@@ -1,3 +1,6 @@
 shillelagh
 datetime
 uuid
+matplotlib-venn-wordcloud
+wordcloud
+matplotlib

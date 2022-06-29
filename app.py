@@ -44,5 +44,31 @@ if st.button("Submit", key='submit'):
 
     conn.execute(insert)
 
+    all_dem_words = []
+    all_rep_words = []
     for row in conn.execute(query):
-        st.write(f"{row}")
+        all_dem_words.append(row[4])
+        all_rep_words.append(row[5])
+
+    from wordcloud import WordCloud
+    import matplotlib.pyplot as plt
+    from matplotlib_venn_wordcloud import venn2_wordcloud
+
+    fig, ax = plt.subplots(figsize=(15,12))
+
+    ax.set_title('Words Considered Negative by Human and Harvard Inquirer Dictionary', fontsize=20)
+    v = venn2_wordcloud([set(all_rep_words), set(all_dem_words)],
+                    set_colors=['red', 'blue'],
+                    set_edgecolors=['w', 'w'],
+                    alpha = .2,
+                    ax=ax, set_labels=['Republican', 'Democrat'])
+                    #word_to_frequency=all_pos_freq
+    # add color
+    #v.get_patch_by_id('10').set_color('red')
+    #v.get_patch_by_id('10').set_alpha(0.4)
+    #v.get_patch_by_id('01').set_color('blue')
+    #v.get_patch_by_id('01').set_alpha(0.4)
+    v.get_patch_by_id('11').set_color('purple')
+    v.get_patch_by_id('11').set_alpha(0.2)
+
+
