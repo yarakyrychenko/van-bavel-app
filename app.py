@@ -6,15 +6,6 @@ from uuid import uuid4
 st.title(" America divided? ") 
 st.header("See how you and other twitter users see each party visualized in wordclouds ")
 st.text_input("Enter your twitter username", key="name")
-st.session_state.party = st.radio(
-     "How do you identify?",
-     ('Independant','Republican', 'Democrat'))
-
-st.subheader("Feeling Thermomether")
-st.slider("How warm do you feel about Democrats (0 = coldest rating; 100 = warmest rating)?", 
-    min_value=0, max_value=100, value=50, step=1,key="dem_temp")          
-st.slider("How warm do you feel about Republicans (0 = coldest rating; 100 = warmest rating)?", 
-    min_value=0, max_value=100, value=50, step=1,key="rep_temp")  
 
 dem_words = []
 st.subheader("Please add five words that describe Democrats best")
@@ -29,6 +20,15 @@ for i in range(5):
     rep_words.append(st.text_input("R"+str(i+1),key = "R"+str(i+1)))
 st.session_state.rep_words = ", ".join(rep_words).lower()
 st.markdown(f"Your words are {st.session_state.rep_words}.")
+
+st.subheader("Feeling Thermomether")
+st.slider("How warm do you feel about Democrats (0 = coldest rating; 100 = warmest rating)?", 
+    min_value=0, max_value=100, value=50, step=1,key="dem_temp")          
+st.slider("How warm do you feel about Republicans (0 = coldest rating; 100 = warmest rating)?", 
+    min_value=0, max_value=100, value=50, step=1,key="rep_temp") 
+st.session_state.party = st.radio(
+     "How do you identify?",
+     ('Independant','Republican', 'Democrat')) 
 
 if st.button("Submit", key='submit'):
     st.session_state.id = datetime.now().strftime('%Y%m-%d%H-%M-') + str(uuid4())
