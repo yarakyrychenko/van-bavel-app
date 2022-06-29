@@ -50,7 +50,7 @@ if st.button("Submit", key='submit'):
         all_dem_words.append(row[3])
         all_rep_words.append(row[4])
     st.text(str(all_dem_words))
-    st.text(str(rep_dem_words))
+    st.text(str(all_rep_words))
 
     from wordcloud import WordCloud
     import matplotlib.pyplot as plt
