@@ -12,7 +12,7 @@ credentials = service_account.Credentials.from_service_account_info(
 # Create a connection object.
 conn = connect(":memory:", 
                adapter_kwargs = {
-                   "gsheetaspi": { 
+                   "gsheetsapi": { 
                        "service_account_info":  st.secrets["gcp_service_account"] 
                                    }
                                     }
