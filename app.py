@@ -69,8 +69,9 @@ if st.button("Submit", key='submit'):
     counter=collections.Counter(all_words.split(", "))
     freq_dict = {word: freq/n_show for word, freq in counter.most_common(n_show)}
     all_dem_words = [ word for word in all_dem_words if word in list(freq_dict.keys()) ]        
-    rep_dem_words = [ word for word in all_rep_words if word in list(freq_dict.keys()) ]        
-
+    rep_dem_words = [ word for word in all_rep_words if word in list(freq_dict.keys()) ]   
+    st.write(n_show)     
+    st.write(all_dem_words)
     import matplotlib.pyplot as plt
     from matplotlib_venn_wordcloud import venn2_wordcloud
 
