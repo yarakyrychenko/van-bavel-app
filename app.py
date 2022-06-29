@@ -51,7 +51,7 @@ if submitted:
             VALUES ("{st.session_state.id}", "{st.session_state.name}", "{st.session_state.party}", "{st.session_state.dem_words}", "{st.session_state.rep_words}", "{st.session_state.dem_temp}","{st.session_state.rep_temp}")
             """
 
-    if st.session_state.rep_words[4] != "":
+    if st.session_state.rep_words[-2:] != ", ":
         conn.execute(insert)
 
         all_dem_words = []
