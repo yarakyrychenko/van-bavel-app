@@ -86,6 +86,22 @@ if st.button("Submit", key='submit'):
     v.get_patch_by_id('11').set_alpha(0.2)
     st.pyplot(fig)
 
+    import streamlit.components.v1 as components
+
+    components.html(
+    """
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" 
+        data-text="Check out this app 🇺🇸🎈" 
+        data-url="https://share.streamlit.io/yarakyrychenko/van-bavel-app/main/app.py"
+        data-show-count="false">
+        data-size="Large" 
+        data-hashtags="polarization,usa"
+        Tweet
+        </a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    """
+)
+
 
 
 
