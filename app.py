@@ -10,14 +10,14 @@ st.session_state.party = st.radio(
 
 dem_words = []
 st.text("Please add ten words that describe Democrats best in your opinion below:")
-for i in range(10):
-    dem_words.append(st.text_input(str(i+1)))
+for i in range(5):
+    dem_words.append(st.text_input("D"+str(i+1)))
 st.session_state.dem_words = ",".join(dem_words)
 
 rep_words = []
 st.text("Please add ten words that describe Democrats best in your opinion below:")
-for i in range(10):
-    rep_words.append(st.text_input(str(i+1)))
+for i in range(5):
+    rep_words.append(st.text_input("R"+str(i+1)))
 st.session_state.rep_words = ",".join(rep_words)
        
 # Create a connection object.
