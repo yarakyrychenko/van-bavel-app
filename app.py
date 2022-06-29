@@ -10,6 +10,12 @@ st.session_state.party = st.radio(
      "How do you identify?",
      ('Independant','Republican', 'Democrat'))
 
+st.subheader("Feeling Thermomether")
+st.slider("How warm do you feel about Republicans (0 = coldest rating; 100 = warmest rating)?", 
+    min_value=0, max_value=100, value=50, step=1,key="rep_temp")  
+st.slider("How warm do you feel about Democrats (0 = coldest rating; 100 = warmest rating)?", 
+    min_value=0, max_value=100, value=50, step=1,key="dem_temp")          
+
 dem_words = []
 st.subheader("Please add five words that describe Democrats best:")
 for i in range(5):
