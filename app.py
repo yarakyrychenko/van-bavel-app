@@ -4,7 +4,7 @@ from datetime import datetime
 from uuid import uuid4
 
 st.title(" 🇺🇸 America divided? 🇺🇸 ") 
-st.header("See how people described two party members with wordclouds.")
+st.subheader("See how people described two party members with wordclouds.")
 st.text_input("Enter your twitter username", key="name")
 
 dem_words = []
