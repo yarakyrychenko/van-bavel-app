@@ -67,7 +67,7 @@ if st.button("Submit", key='submit'):
 
     n_show = len(all_words.split(", ")) if len(all_words.split(", ")) < 200 else 200
     counter=collections.Counter(all_words.split(", "))
-    freq_dict = {item[0]: item[1]/n_show for item in counter.most_common(n_show)}
+    freq_dict = {item[0]: item[1] for item in counter.most_common(n_show)}
     all_dem_words = [ word for word in all_dem_words if word in list(freq_dict.keys()) ]        
     rep_dem_words = [ word for word in all_rep_words if word in list(freq_dict.keys()) ]   
     st.write(freq_dict)
