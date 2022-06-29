@@ -1,6 +1,2 @@
 mysql-connector-python
 streamlit
-matplotlib
-tweepy
-regex
-wordcloud
