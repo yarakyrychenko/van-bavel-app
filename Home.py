@@ -54,7 +54,7 @@ if st.session_state.username_mine == 'This username belongs to me.':
             st.markdown("### Thanks for submitting your answers!")
             st.session_state.id = datetime.now().strftime('%Y%m-%d%H-%M-') + str(uuid4())
             st.markdown(f"Your app ID is {st.session_state.id}. Note it down and email us if you want your answers deleted.") 
-            conn = connect(":memory:", 
+            st.session_state.conn = connect(":memory:", 
                 adapter_kwargs = {
                     "gsheetsapi": { 
                         "service_account_info":  st.secrets["gcp_service_account"] 
@@ -70,7 +70,7 @@ if st.session_state.username_mine == 'This username belongs to me.':
             st.error("Please fill out every field and try again.")
 
 if st.session_state.username_mine == 'This username is belongs to someone else.':
-    conn = connect(":memory:", 
+    st.session_state.conn = connect(":memory:", 
                 adapter_kwargs = {
                     "gsheetsapi": { 
                         "service_account_info":  st.secrets["gcp_service_account"] 

@@ -11,7 +11,7 @@ st.set_page_config(
 st.title("Linguistic Analysis")
 
 if 'df' not in st.session_state:
-    executed_query = get_all_data(conn)
+    executed_query = get_all_data(st.session_state.conn)
     st.session_state.df = make_dataframe(executed_query)
 
 st.markdown('cat')
