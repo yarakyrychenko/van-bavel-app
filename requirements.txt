@@ -3,3 +3,4 @@ datetime
 uuid
 matplotlib-venn-wordcloud
 matplotlib
+pandas
