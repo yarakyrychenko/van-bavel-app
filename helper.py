@@ -20,6 +20,7 @@ def make_dataframe(executed_query):
     cols = ["party", "dem_words", "rep_words", "dem_temp", "rep_temp"]
     df = pd.DataFrame(columns=cols)
     for row in executed_query:
+        st.write(row)
         df1 = pd.DataFrame(row[2:], columns=cols)
         df = pd.concat([df, df1], ignore_index=True)
 

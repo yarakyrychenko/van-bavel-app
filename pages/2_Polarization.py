@@ -11,6 +11,7 @@ st.title("Polarization")
 
 if 'df' not in st.session_state:
     executed_query = get_all_data(st.session_state.conn)
+    st.write(executed_query)
     st.session_state.df = make_dataframe(executed_query)
 
 else:        
