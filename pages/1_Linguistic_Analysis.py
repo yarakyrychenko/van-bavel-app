@@ -10,8 +10,7 @@ st.set_page_config(
 
 st.title("Linguistic Analysis")
 
-if 'df' not in st.session_state:
-    executed_query = get_all_data(st.session_state.conn)
-    st.session_state.df = make_dataframe(executed_query)
-
-st.markdown('cat')
+if 'conn' not in st.session_state:
+    st.warning("Please go to the homepage and add a twitter username")
+elif 'df' not in st.session_state:
+    pass
