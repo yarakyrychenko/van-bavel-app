@@ -22,14 +22,13 @@ else:
     st.pyplot(figure)
 
     group_means = st.session_state.df.groupby("party").agg('mean')
-    st.write(group_means)
 
     st.markdown("### Feeling Thermometer Results")
-    st.markdown(f"On average, Republicans who filled out this app feel {group_means.loc('Republican','dem_temp')} towards Democrats.")
-    st.markdown(f"On average, Democrats who filled out this app feel {group_means.loc('Democrat','rep_temp')} towards Democrats.")
+    st.markdown(f"On average, Republicans who filled out this app feel {group_means.loc['Republican','dem_temp']} towards Democrats.")
+    st.markdown(f"On average, Democrats who filled out this app feel {group_means.loc['Democrat','rep_temp']} towards Democrats.")
         
-    st.markdown(f"In contrast, Republicans feel {group_means.loc('Republican','rep_temp')} towards fellow Republicans.")
-    st.markdown(f"And Democrats feel {group_means.loc('Democrat','dem_temp')} towards fellow Democrats.")
+    st.markdown(f"In contrast, Republicans feel {group_means.loc['Republican','rep_temp']} towards fellow Republicans.")
+    st.markdown(f"And Democrats feel {group_means.loc['Democrat','dem_temp']} towards fellow Democrats.")
         
     make_twitter_button()
 
