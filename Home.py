@@ -57,9 +57,8 @@ if st.session_state.last_name != st.session_state.name:
                 from datetime import datetime
                 from uuid import uuid4
 
-                st.markdown("### Thanks for submitting your answers!")
+                
                 st.session_state.id = datetime.now().strftime('%Y%m-%d%H-%M-') + str(uuid4())
-                st.markdown(f"Your app ID is {st.session_state.id}. Note it down and email us if you want your answers deleted.") 
                 st.session_state.conn = connect(":memory:", 
                     adapter_kwargs = {
                     "gsheetsapi": { 
@@ -70,6 +69,9 @@ if st.session_state.last_name != st.session_state.name:
 
                 insert_user_data(conn, st.secrets["private_gsheets_url"])
 
+                st.markdown("### Thanks for submitting your answers!")
+                st.markdown(f"Your app ID is {st.session_state.id}. Note it down and email us if you want your answers deleted.") 
+                st.success("Open the sidebar and navigate to 'Linguistic Analysis' or  'Polarization' to see your results.")
                 with st.sidebar:
                     st.markdown(f"👉 Click 'Linguistic Analysis' in the app menu to find out what language {st.session_state.name} and others use on Twitter.")
                     st.markdown(f"👉 Click 'Polarization' in the app menu to find out how {st.session_state.name} and others think and talk about the US political parties.")
@@ -89,6 +91,7 @@ if st.session_state.last_name != st.session_state.name:
                 Some analyses will not be available. 
                 If you change your mind at any point, return to this page to enter your Twitter username.
                 """)
+        st.success("Open the sidebar and navigate to 'Linguistic Analysis' or  'Polarization' to see your results.")
         with st.sidebar:
             st.markdown(f"👉 Click 'Linguistic Analysis' in the app menu to find out what language {st.session_state.name} and others use on Twitter.")
             st.markdown(f"👉 Click 'Polarization' in the app menu to find out how {st.session_state.name} and others think and talk about the US political parties.")
