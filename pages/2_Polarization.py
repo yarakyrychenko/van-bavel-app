@@ -21,7 +21,7 @@ else:
     st.markdown(f"### Here is how {str(len(st.session_state.df))} people who filled out this app describe the two parties.")
     st.pyplot(figure)
 
-    group_means = st.session_state.df[["party","dem_temp","rep_temp"]].groupby("party").agg('mean')
+    group_means = st.session_state.df.groupby("party").agg('mean')
     st.write(group_means)
 
     st.markdown("### Feeling Thermometer Results")
