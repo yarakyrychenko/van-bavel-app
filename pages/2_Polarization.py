@@ -12,7 +12,7 @@ st.title("Polarization")
 if 'df' not in st.session_state:
     sheet_url = st.secrets["private_gsheets_url"]
     query = f'SELECT * FROM "{sheet_url}"'
-    st.session_state.df = make_dataframe(conn.execute(query))
+    st.session_state.df = make_dataframe(st.session_state.conn.execute(query))
 
 else:        
     st.write(list(st.session_state.df.dem_words))
