@@ -12,9 +12,8 @@ def insert_user_data(conn, sheet_url):
 
 def make_dataframe(executed_query):
     import pandas as pd 
-    st.write(executed_query.fetchall())
     df = pd.DataFrame(executed_query.fetchall())
-    df.columns = executed_query.keys()
+    df.columns = ["id", "twitter_username", "party", "dem_words", "rep_words", "dem_temp", "rep_temp"]
     df = df.drop(["id","twitter_username"],axis=1)
     return df
 
