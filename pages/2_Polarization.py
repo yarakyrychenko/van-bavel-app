@@ -12,9 +12,10 @@ st.title("Polarization")
 if 'conn' not in st.session_state:
     st.warning("Please go to the homepage and add a twitter username")
 elif 'df' not in st.session_state:
-    sheet_url = st.secrets["private_gsheets_url"]
-    query = f'SELECT * FROM "{sheet_url}"'
-    st.session_state.df = make_dataframe(st.session_state.conn.execute(query))
+    with st.spinner(text="In progress..."):
+        sheet_url = st.secrets["private_gsheets_url"]
+        query = f'SELECT * FROM "{sheet_url}"'
+        st.session_state.df = make_dataframe(st.session_state.conn.execute(query))
 else:        
     figure = make_v_wordcloud(list(st.session_state.df.dem_words), list(st.session_state.df.rep_words))    
         
@@ -24,7 +25,7 @@ else:
     group_means = st.session_state.df.groupby("party").agg('mean')
 
     st.markdown("### Feeling Thermometer Results")
-    
+
     st.markdown(f"On average, Republicans who filled out this app feel {group_means.loc['Republican','dem_temp']} towards Democrats. Democrats who filled out this app feel {group_means.loc['Democrat','rep_temp']} towards Republicans.")
         
     st.markdown(f"In contrast, Republicans feel {group_means.loc['Republican','rep_temp']} towards fellow Republicans. And Democrats feel {group_means.loc['Democrat','dem_temp']} towards fellow Democrats.")
