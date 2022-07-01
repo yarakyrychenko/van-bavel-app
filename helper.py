@@ -12,13 +12,10 @@ def insert_user_data(conn, sheet_url):
 
 def make_dataframe(executed_query):
     import pandas as pd 
-    cols = ["party", "dem_words", "rep_words", "dem_temp", "rep_temp"]
     df = pd.DataFrame(columns=cols)
-    for row in executed_query:
-        df1 = pd.DataFrame(row.tolist()[2:], index=[0], columns=cols)
-        st.write(df1)
-        df = pd.concat([df, df1], ignore_index=True)
-
+    df = pd.DataFrame(executed_query.fetchall())
+    df.columns = executed_query.keys()
+    df = df.drop([0,1],axis=1)
     return df
 
 def make_v_wordcloud(all_dem_words, all_rep_words):
