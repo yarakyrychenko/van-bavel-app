@@ -17,7 +17,7 @@ elif 'df' not in st.session_state:
     st.session_state.df = make_dataframe(st.session_state.conn.execute(query))
 else:        
     st.write(list(st.session_state.df.dem_words))
-    figure = make_v_wordcloud(list(st.session_state.df.dem_words), list(st.session_state.dfrep_words))    
+    figure = make_v_wordcloud(list(st.session_state.df.dem_words), list(st.session_state.df.rep_words))    
         
     st.markdown(f"### Here is how {str(len(st.session_state.df))} people who filled out this app describe the two parties.")
     st.pyplot(figure)
