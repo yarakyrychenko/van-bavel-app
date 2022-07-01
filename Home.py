@@ -70,8 +70,10 @@ if st.session_state.last_name != st.session_state.name:
 
                 insert_user_data(conn, st.secrets["private_gsheets_url"])
 
-                st.markdown("Click on [Linguistic Analysis]() to find out what language you and others use on Twitter.")
-                st.markdown("Click on [Partisanship]() to find out how you and others think and talk about the US political parties.")
+                with st.sidebar:
+                    st.markdown(f"👉 Click 'Linguistic Analysis' in the app menu to find out what language {st.session_state.name} and others use on Twitter.")
+                    st.markdown(f"👉 Click 'Polarization' in the app menu to find out how {st.session_state.name} and others think and talk about the US political parties.")
+
             else:
                 st.error("Please fill out every field and try again.")
 
@@ -87,8 +89,9 @@ if st.session_state.last_name != st.session_state.name:
                 Some analyses will not be available. 
                 If you change your mind at any point, return to this page to enter your Twitter username.
                 """)
-        st.markdown(f"👉 Click [Linguistic Analysis](https://share.streamlit.io/yarakyrychenko/van-bavel-app/main/Home.py/Linguistic_Analysis) to find out what language {st.session_state.name} and others use on Twitter.")
-        st.markdown(f"👉 Click [Polarization](https://share.streamlit.io/yarakyrychenko/van-bavel-app/main/Home.py/Polarization) to find out how {st.session_state.name} and others think and talk about the US political parties.")
+        with st.sidebar:
+            st.markdown(f"👉 Click 'Linguistic Analysis' in the app menu to find out what language {st.session_state.name} and others use on Twitter.")
+            st.markdown(f"👉 Click 'Polarization' in the app menu to find out how {st.session_state.name} and others think and talk about the US political parties.")
 
 
 
