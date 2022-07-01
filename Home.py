@@ -22,7 +22,7 @@ if "last_name" not in st.session_state:
 if st.session_state.last_name != st.session_state.name:    
 
     st.session_state.username_mine = st.radio(
-        "I confirm that:",
+        "I confirm that",
         ('This username belongs to me.', 'This username is belongs to someone else.')) 
 
     if st.session_state.username_mine == 'This username belongs to me.':
@@ -87,8 +87,8 @@ if st.session_state.last_name != st.session_state.name:
                 Some analyses will not be available. 
                 If you change your mind at any point, return to this page to enter your Twitter username.
                 """)
-        st.markdown(f"### Click 'Twitter Language Analysis' to find out what language {st.session_state.name} and others use on Twitter.")
-        st.markdown(f"### Click 'Linguistic Partisanship' to find out how {st.session_state.name} and others think and talk about the US political parties.")
+        st.markdown(f"👉 Click [Linguistic Analysis](https://share.streamlit.io/yarakyrychenko/van-bavel-app/main/Home.py/Linguistic_Analysis) to find out what language {st.session_state.name} and others use on Twitter.")
+        st.markdown(f"👉 Click [Polarization](https://share.streamlit.io/yarakyrychenko/van-bavel-app/main/Home.py/Polarization) to find out how {st.session_state.name} and others think and talk about the US political parties.")
 
 
 
