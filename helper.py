@@ -10,11 +10,6 @@ def insert_user_data(conn, sheet_url):
     conn.execute(insert)
 
 
-def get_all_data(conn):
-    sheet_url = st.secrets["private_gsheets_url"]
-    query = f'SELECT * FROM "{sheet_url}"'
-    return conn.execute(query)
-
 def make_dataframe(executed_query):
     import pandas as pd 
     cols = ["party", "dem_words", "rep_words", "dem_temp", "rep_temp"]

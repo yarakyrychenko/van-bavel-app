@@ -10,9 +10,9 @@ st.set_page_config(
 st.title("Polarization")
 
 if 'df' not in st.session_state:
-    executed_query = get_all_data(st.session_state.conn)
-    st.write(executed_query)
-    st.session_state.df = make_dataframe(executed_query)
+    sheet_url = st.secrets["private_gsheets_url"]
+    query = f'SELECT * FROM "{sheet_url}"'
+    st.session_state.df = make_dataframe(conn.execute(query))
 
 else:        
     st.write(list(st.session_state.df.dem_words))
