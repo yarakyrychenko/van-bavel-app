@@ -7,7 +7,7 @@ st.set_page_config(
 )
 
 st.title("Language and Identity on Twitter") 
-st.subheader("See multiple linguistic Twitter analysis.")
+#st.subheader("See multiple linguistic Twitter analysis.")
 st.warning("""
            By submitting the form below you agree to your data being used for research. 
            Your twitter username will be stored in a private google sheet and will not be shared with anyone (unless extraordinary circumstances force us to share it). 
@@ -18,7 +18,7 @@ st.text_input("Enter a twitter username to begin", key="name")
 
 if "last_name" not in st.session_state:
         st.session_state.last_name = ""
-        
+
 if st.session_state.last_name != st.session_state.name:    
 
     st.session_state.username_mine = st.radio(
