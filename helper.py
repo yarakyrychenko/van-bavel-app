@@ -12,6 +12,7 @@ def insert_user_data(conn, sheet_url):
 
 def make_dataframe(executed_query):
     import pandas as pd 
+    st.write(executed_query.fetchall())
     df = pd.DataFrame(executed_query.fetchall())
     df.columns = executed_query.keys()
     df = df.drop(["id","twitter_username"],axis=1)
