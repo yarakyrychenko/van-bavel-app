@@ -15,8 +15,7 @@ def make_dataframe(executed_query):
     cols = ["party", "dem_words", "rep_words", "dem_temp", "rep_temp"]
     df = pd.DataFrame(columns=cols)
     for row in executed_query:
-        st.write(list(row[2:]))
-        df1 = pd.DataFrame(list(row[2:]), index=[0], columns=cols)
+        df1 = pd.DataFrame(row.tolist()[2:], index=[0], columns=cols)
         st.write(df1)
         df = pd.concat([df, df1], ignore_index=True)
 
