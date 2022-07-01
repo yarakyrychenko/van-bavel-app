@@ -73,8 +73,8 @@ if st.session_state.last_name != st.session_state.name:
                 st.markdown(f"Your app ID is {st.session_state.id}. Note it down and email us if you want your answers deleted.") 
                 st.success("Open the sidebar and navigate to 'Linguistic Analysis' or  'Polarization' to see your results.")
                 with st.sidebar:
-                    st.markdown(f"👉 Click 'Linguistic Analysis' in the app menu to find out what language {st.session_state.name} and others use on Twitter.")
-                    st.markdown(f"👉 Click 'Polarization' in the app menu to find out how {st.session_state.name} and others think and talk about the US political parties.")
+                    st.markdown(f"👉 Click 'Linguistic Analysis' to find out what language {st.session_state.name} and others use on Twitter.")
+                    st.markdown(f"👉 Click 'Polarization' to find out how {st.session_state.name} and others think and talk about the US political parties.")
 
             else:
                 st.error("Please fill out every field and try again.")
@@ -93,8 +93,8 @@ if st.session_state.last_name != st.session_state.name:
                 """)
         st.success("Open the sidebar and navigate to 'Linguistic Analysis' or  'Polarization' to see your results.")
         with st.sidebar:
-            st.markdown(f"👉 Click 'Linguistic Analysis' in the app menu to find out what language {st.session_state.name} and others use on Twitter.")
-            st.markdown(f"👉 Click 'Polarization' in the app menu to find out how {st.session_state.name} and others think and talk about the US political parties.")
+            st.markdown(f"👉 Click 'Linguistic Analysis' to find out what language {st.session_state.name} and others use on Twitter.")
+            st.markdown(f"👉 Click 'Polarization' to find out how {st.session_state.name} and others think and talk about the US political parties.")
 
 
 
