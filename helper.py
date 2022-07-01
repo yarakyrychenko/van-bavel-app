@@ -15,7 +15,7 @@ def make_dataframe(executed_query):
     df = pd.DataFrame(columns=cols)
     df = pd.DataFrame(executed_query.fetchall())
     df.columns = executed_query.keys()
-    df = df.drop([0,1],axis=1)
+    df = df.drop(["id","twitter_username"],axis=1)
     return df
 
 def make_v_wordcloud(all_dem_words, all_rep_words):
