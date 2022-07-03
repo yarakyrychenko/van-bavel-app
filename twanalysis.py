@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 import tweepy, re
 from wordcloud import WordCloud
 from collections import Counter
+import streamlit as st
+
+
 
 def make_worddict(file_name):
     text_file = open(file_name, "r")
@@ -18,7 +21,7 @@ def authenticate(consumer_key, consumer_secret,access_token_key, access_token_se
 
 def get_user_tweeets(screen_name,api):
     alltweets = [] 
-    new_tweets = api.user_timeline(screen_name = screen_name,count=200)
+    new_tweets = api.user_timeline(screen_name = screen_name,count=3200)
     alltweets.extend(new_tweets)
     outtweets = [tweet.text for tweet in alltweets] 
     return outtweets
@@ -48,5 +51,6 @@ def count_words(all_text,dict):
     for word in dict:
         word = word.split("*")[0]
         numbers = [counter[key] for key in keys if key.startswith(word)]
+        st.write(numbers)
         total += sum(numbers)
     return total
