@@ -36,7 +36,7 @@ if "api" not in st.session_state:
                                             st.secrets["access_token_secret"])
 
 if 'df' in st.session_state:
-    try:
+    #try:
     outtweets = get_user_tweeets(st.session_state.name,st.session_state.api)
     st.write(outtweets[9])
         #try:
