@@ -3,7 +3,8 @@ from shillelagh.backends.apsw.db import connect
 
 st.set_page_config(
     page_title="App Home",
-    page_icon=""
+    page_icon="",
+    initial_sidebar_state = "expanded" 
 )
 
 st.title("Language and Identity on Twitter") 
