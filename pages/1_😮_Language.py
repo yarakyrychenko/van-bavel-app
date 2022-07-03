@@ -52,5 +52,5 @@ if 'df' in st.session_state:
         #except:
           #  st.markdown("This account has fewer than 10 tweets. Tweet more and come back later or try again.")  
             
-    except:
+    #except:
          #   st.markdown("This account doesn't exist. Please try again.")        
