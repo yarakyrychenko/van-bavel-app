@@ -1,5 +1,7 @@
 import streamlit as st
 from shillelagh.backends.apsw.db import connect
+import requests
+from streamlit_lottie import st_lottie
 
 st.set_page_config(
     page_title="Language and Identity on Twitter",
@@ -11,15 +13,23 @@ st.set_page_config(
          #'Report a bug': "https://www.extremelycoolapp.com/bug",
          'About': "# Find out your linguistic Twitter profile." }
 )
-st.session_state.name = ""
 
 with st.sidebar:
     st.markdown("""👋 **Welcome!** Go to **Home** to enter a Twitter username. 
                 Then navigate to **Linguistic Analysis** or **Polarization** to find out how your results. 
                 """)
 
+def load_lottieurl(url: str):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
+
+lottie_tweet = load_lottieurl('https://assets2.lottiefiles.com/packages/lf20_MUGYrv.json')
+st_lottie(lottie_tweet, speed=1, height=200, key="initial")
+
 st.title("Language and Identity on Twitter") 
-#st.subheader("See multiple linguistic Twitter analysis.")
+st.subheader("See multiple linguistic Twitter analysis.")
 
 placeholder = st.empty()
 with placeholder.container():
@@ -41,7 +51,7 @@ if agree:
            """)
         st.markdown("You have consented.")
     
-    st.text_input("Enter a twitter username to begin", key="name")
+    st.text_input("Enter a twitter username to begin", key="name", placeholder="e.g. POTUS")
     st.session_state.username_mine = st.radio(
             "I confirm that",
             ('This username belongs to me.', 'This username is belongs to someone else.')) 
@@ -50,7 +60,7 @@ if agree:
 st.session_state.submitted = False
 st.session_state.disable = True 
 
-if st.session_state.name != "" and 'username_mine' in st.session_state and st.session_state.username_mine == 'This username belongs to me.' and agree:
+if 'username_mine' in st.session_state and st.session_state.username_mine == 'This username belongs to me.' and agree:
     form_place = st.empty()
     with form_place.container():
         form = st.expander("Form",expanded=True)
