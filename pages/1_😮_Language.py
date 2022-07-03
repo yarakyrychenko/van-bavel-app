@@ -48,15 +48,14 @@ if 'df' in st.session_state:
 
     counter = Counter(all_text.split()) 
     keys = counter.keys()
-    st.write(keys)
     total = 0
     for word in st.session_state.moral_emotional:
         word = word.split("*")[0]
         numbers = [counter[key] for key in keys if key.startswith(word)]
-        st.write(numbers)
         total += sum(numbers)
     st.write(len(all_text.split()))
     st.write(total)
+    st.write(len(outtweets))
     #st.pyplot(figure)
     #st.markdown(f"{n_moral_emotional/len(all_text.split())}\% of words you used are moral emotional.")
 
