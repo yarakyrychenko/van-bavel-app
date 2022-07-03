@@ -11,10 +11,11 @@ st.set_page_config(
          #'Report a bug': "https://www.extremelycoolapp.com/bug",
          'About': "# Find out your linguistic Twitter profile." }
 )
+st.session_state.name = ""
 
 with st.sidebar:
-    st.markdown("""👋 *Welcome!* Go to *Home* to enter a Twitter username. 
-                Then navigate to *Linguistic Analysis* or *Polarization* to find out how your results. 
+    st.markdown("""👋 **Welcome!** Go to **Home** to enter a Twitter username. 
+                Then navigate to **Linguistic Analysis** or **Polarization** to find out how your results. 
                 """)
 
 st.title("Language and Identity on Twitter") 
@@ -26,7 +27,7 @@ with placeholder.container():
         st.markdown("""
            By submitting the form below you agree to your data being used for research. 
            Your twitter username will be stored in a private google sheet and will not be shared with anyone (unless extraordinary circumstances force us to share it). 
-           You can ask for your data to be deleted by emailing us with an app ID number you'll be issued after submitting the form. 
+           You can ask for your data to be deleted by emailing us with an ID number you'll be issued after submitting the form. 
            """)
         agree = st.checkbox("I understand and consent.")
 
@@ -49,7 +50,7 @@ if agree:
 st.session_state.submitted = False
 st.session_state.disable = True 
 
-if 'username_mine' in st.session_state and st.session_state.username_mine == 'This username belongs to me.' and agree:
+if st.session_state.name != "" and 'username_mine' in st.session_state and st.session_state.username_mine == 'This username belongs to me.' and agree:
     form_place = st.empty()
     with form_place.container():
         form = st.expander("Form",expanded=True)
