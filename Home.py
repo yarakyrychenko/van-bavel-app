@@ -120,7 +120,7 @@ if 'username_mine' in st.session_state and st.session_state.username_mine == 'Th
                 Some analyses will not be available. 
                 If you change your mind at any point, return to this page to enter your Twitter username.
                 """)
-        st.success("Open the sidebar and navigate to 'Linguistic Analysis' or  'Polarization' to see your results.")
+        st.success("Open the sidebar and navigate to **Language** or  **Polarization** to see your results.")
 
 
 
