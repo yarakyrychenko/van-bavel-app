@@ -38,15 +38,14 @@ if "api" not in st.session_state:
 if 'df' in st.session_state:
     #try:
     outtweets = get_user_tweeets(st.session_state.name,st.session_state.api)
-    st.write(outtweets[9])
         #try:
-         #cat = outtweets[9]  
+    cat = outtweets[9]  
             
-            #with st.spinner(text='We\'re analyzing the tweets. Give it a sec...'):
-               # figure, all_text = make_wordcloud(st.session_state.all_stopwords, outtweets)
-            #    n_moral_emotional = count_words(all_text, st.session_state.moral_emotional)
-            #st.pyplot(figure)
-            #st.markdown(f"{total/len(all_text.split())}\% of words you used are moral emotional.")
+    with st.spinner(text='We\'re analyzing the tweets. Give it a sec...'):
+        figure, all_text = make_wordcloud(st.session_state.all_stopwords, outtweets)
+        n_moral_emotional = count_words(all_text, st.session_state.moral_emotional)
+    st.pyplot(figure)
+    st.markdown(f"{total/len(all_text.split())}\% of words you used are moral emotional.")
 
                 
         #except:
