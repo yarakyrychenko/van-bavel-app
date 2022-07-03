@@ -1,3 +1,4 @@
+from socket import if_nameindex
 import matplotlib.pyplot as plt 
 import tweepy, re
 from wordcloud import WordCloud
@@ -46,6 +47,6 @@ def count_words(all_text,dict):
     total = 0
     for word in dict:
         word = word.split("*")[0]
-        numbers = [counter[key] for key in keys in key.startswith(word)]
+        numbers = [counter[key] for key in keys if key.startswith(word)]
         total += sum(numbers)
     return total
