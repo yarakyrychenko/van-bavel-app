@@ -4,10 +4,17 @@ from shillelagh.backends.apsw.db import connect
 
 st.set_page_config(
         page_title="Polarization",
-        page_icon=""
+        page_icon="🔥",
+        layout="wide"
         )
 
-st.title("Polarization")
+with st.sidebar:
+    st.markdown("""👋 **Welcome!** Go to **Home** to enter a Twitter username. 
+                Then navigate to **Language** or **Polarization** to find out how your results. 
+                """)
+
+
+st.title("🔥 Polarization 🔥")
 
 if 'conn' not in st.session_state:
     st.warning("Please go to the homepage and add a twitter username")
