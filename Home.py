@@ -16,7 +16,7 @@ st.set_page_config(
 
 with st.sidebar:
     st.markdown("""👋 **Welcome!** Go to **Home** to enter a Twitter username. 
-                Then navigate to **Linguistic Analysis** or **Polarization** to find out how your results. 
+                Then navigate to **Language* or **Polarization** to find out how your results. 
                 """)
 
 def load_lottieurl(url: str):
