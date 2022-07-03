@@ -44,6 +44,8 @@ if 'df' in st.session_state:
     with st.spinner(text='We\'re analyzing the tweets. Give it a sec...'):
         figure, all_text = make_wordcloud(st.session_state.all_stopwords, outtweets)
         n_moral_emotional = count_words(all_text, st.session_state.moral_emotional)
+    st.write(st.session_state.moral_emotional)
+    st.write(n_moral_emotional)
     st.pyplot(figure)
     st.markdown(f"{n_moral_emotional/len(all_text.split())}\% of words you used are moral emotional.")
 
