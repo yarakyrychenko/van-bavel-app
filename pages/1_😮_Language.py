@@ -3,6 +3,7 @@ import streamlit as st
 from helper import *
 from shillelagh.backends.apsw.db import connect
 from twanalysis import *
+from collections import Counter
 
 st.set_page_config(
     page_title="Language",
@@ -43,11 +44,21 @@ if 'df' in st.session_state:
             
     with st.spinner(text='We\'re analyzing the tweets. Give it a sec...'):
         figure, all_text = make_wordcloud(st.session_state.all_stopwords, outtweets)
-        n_moral_emotional = count_words(all_text, st.session_state.moral_emotional)
-    st.write(st.session_state.moral_emotional)
-    st.write(n_moral_emotional)
-    st.pyplot(figure)
-    st.markdown(f"{n_moral_emotional/len(all_text.split())}\% of words you used are moral emotional.")
+        #n_moral_emotional = count_words(all_text, st.session_state.moral_emotional)
+
+    counter = Counter(all_text) 
+    keys = counter.keys()
+    st.write(keys)
+    total = 0
+    for word in dict:
+        word = word.split("*")[0]
+        numbers = [counter[key] for key in keys if key.startswith(word)]
+        st.write(numbers)
+        total += sum(numbers)
+    st.write(len(all_text.split()))
+    st.write(total)
+    #st.pyplot(figure)
+    #st.markdown(f"{n_moral_emotional/len(all_text.split())}\% of words you used are moral emotional.")
 
                 
         #except:
