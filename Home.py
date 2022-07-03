@@ -13,8 +13,8 @@ st.set_page_config(
 )
 
 with st.sidebar:
-    st.markdown("""Welcome! Go to 'Home' to enter a Twitter username. 
-                Then navigate to 'Linguistic Analysis' or 'Polarization' to find out how your results. 
+    st.markdown("""👋 *Welcome!* Go to *Home* to enter a Twitter username. 
+                Then navigate to *Linguistic Analysis* or *Polarization* to find out how your results. 
                 """)
 
 st.title("Language and Identity on Twitter") 
@@ -49,7 +49,7 @@ if agree:
 st.session_state.submitted = False
 st.session_state.disable = True 
 
-if st.session_state.username_mine == 'This username belongs to me.' and agree:
+if 'username_mine' in st.session_state and st.session_state.username_mine == 'This username belongs to me.' and agree:
     form_place = st.empty()
     with form_place.container():
         form = st.expander("Form",expanded=True)
