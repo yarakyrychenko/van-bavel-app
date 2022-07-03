@@ -20,7 +20,7 @@ def authenticate(consumer_key, consumer_secret,access_token_key, access_token_se
     return api
 
 def get_user_tweeets(screen_name,api):
-    client = tweepy.Client(bearer_token=st.secrets["bearer_token"])
+    #client = tweepy.Client(bearer_token=st.secrets["bearer_token"])
     outtweets =[]
     for status in tweepy.Cursor(api.user_timeline, screen_name=screen_name, tweet_mode="extended").items():
         outtweets.append(status.full_text)
