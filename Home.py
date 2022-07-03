@@ -96,7 +96,7 @@ if st.session_state.username_mine == 'This username belongs to me.' and agree:
     
                       
     
-if st.session_state.username_mine == 'This username is belongs to someone else.':
+if 'username_mine' in st.session_state and st.session_state.username_mine == 'This username is belongs to someone else.':
     with st.expander("Thank you", expanded=True):
         st.session_state.conn = connect(":memory:", 
                     adapter_kwargs = {
