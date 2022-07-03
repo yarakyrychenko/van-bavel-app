@@ -21,7 +21,7 @@ def authenticate(consumer_key, consumer_secret,access_token_key, access_token_se
 
 def get_user_tweeets(screen_name,api):
     alltweets = [] 
-    new_tweets = api.user_timeline(screen_name = screen_name,count=3200)
+    new_tweets = api.get_users_tweets(screen_name = screen_name,max_results=3200)
     alltweets.extend(new_tweets)
     outtweets = [tweet.text for tweet in alltweets] 
     return outtweets
