@@ -36,11 +36,11 @@ if "api" not in st.session_state:
                                             st.secrets["access_token_secret"])
 
 if 'df' in st.session_state:
-    #try:
+    try:
     outtweets = get_user_tweeets(st.session_state.name,st.session_state.api)
-         
+    st.write(outtweets[9])
         #try:
-           # cat = outtweets[9]  
+         #cat = outtweets[9]  
             
             #with st.spinner(text='We\'re analyzing the tweets. Give it a sec...'):
                # figure, all_text = make_wordcloud(st.session_state.all_stopwords, outtweets)
@@ -52,5 +52,5 @@ if 'df' in st.session_state:
         #except:
           #  st.markdown("This account has fewer than 10 tweets. Tweet more and come back later or try again.")  
             
-    #except:
+    except:
          #   st.markdown("This account doesn't exist. Please try again.")        
