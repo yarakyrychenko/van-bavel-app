@@ -6,3 +6,6 @@ matplotlib
 pandas
 google-auth>=1.23.0,<2
 streamlit-lottie
+tweepy
+regex
+wordcloud
