@@ -46,7 +46,7 @@ if 'df' in st.session_state:
         figure, all_text = make_wordcloud(st.session_state.all_stopwords, outtweets)
         #n_moral_emotional = count_words(all_text, st.session_state.moral_emotional)
 
-    counter = Counter(all_text) 
+    counter = Counter(all_text.split()) 
     keys = counter.keys()
     st.write(keys)
     total = 0
