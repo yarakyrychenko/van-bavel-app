@@ -50,7 +50,7 @@ if 'df' in st.session_state:
     keys = counter.keys()
     st.write(keys)
     total = 0
-    for word in dict:
+    for word in st.session_state.moral_emotional:
         word = word.split("*")[0]
         numbers = [counter[key] for key in keys if key.startswith(word)]
         st.write(numbers)
