@@ -19,12 +19,12 @@ with st.sidebar:
 st.title("😮 Language 😮")
 
 if 'conn' not in st.session_state:
-    st.warning("Please go to the homepage and add a twitter username")
-elif 'df' not in st.session_state:
-    with st.spinner(text="In progress..."):
-        sheet_url = st.secrets["private_gsheets_url"]
-        query = f'SELECT * FROM "{sheet_url}"'
-        st.session_state.df = make_dataframe(st.session_state.conn.execute(query))
+    st.warning("You can go to the homepage and add a different twitter handle.")
+#elif 'df' not in st.session_state:
+    #with st.spinner(text="In progress..."):
+        #sheet_url = st.secrets["private_gsheets_url"]
+        #query = f'SELECT * FROM "{sheet_url}"'
+        #st.session_state.df = make_dataframe(st.session_state.conn.execute(query))
 
 if "all_stopwords" not in st.session_state:
      st.session_state.all_stopwords = make_worddict("dictionaries/all_stopwords.txt")
@@ -38,26 +38,17 @@ if "api" not in st.session_state:
 
 if 'df' in st.session_state:
     #try:
-    outtweets = get_user_tweeets(st.session_state.name,st.session_state.api)
+    outtweets = get_3200_tweets(st.session_state.name,st.session_state.api,3200)
         #try:
     cat = outtweets[9]  
+    st.markdown(f"We scraped {len(outtweets)} tweets from {st.session_state.name}.")
             
     with st.spinner(text='We\'re analyzing the tweets. Give it a sec...'):
         figure, all_text = make_wordcloud(st.session_state.all_stopwords, outtweets)
-        #n_moral_emotional = count_words(all_text, st.session_state.moral_emotional)
+        n_moral_emotional = count_words(all_text, st.session_state.moral_emotional)
 
-    counter = Counter(all_text.split()) 
-    keys = counter.keys()
-    total = 0
-    for word in st.session_state.moral_emotional:
-        word = word.split("*")[0]
-        numbers = [counter[key] for key in keys if key.startswith(word)]
-        total += sum(numbers)
-    st.write(len(all_text.split()))
-    st.write(total)
-    st.write(len(outtweets))
-    #st.pyplot(figure)
-    #st.markdown(f"{n_moral_emotional/len(all_text.split())}\% of words you used are moral emotional.")
+    st.pyplot(figure)
+    st.markdown(f"{n_moral_emotional/len(all_text.split())}\% of words you used are moral emotional.")
 
                 
         #except:
