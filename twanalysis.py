@@ -33,7 +33,9 @@ def get_3200_tweets(screen_name,api):
     new_tweets = api.user_timeline(screen_name = screen_name,count=1)
     alltweets.extend(new_tweets)
     outtweets = [tweet.id for tweet in alltweets] 
+    st.write(outtweets)
     tweets = client.get_users_tweets(id=outtweets[0], tweet_fields=['context_annotations','created_at','geo'])
+    st.write(tweets)
     return [tweet for tweet in tweets.data]
 
 def preprocess(out):
