@@ -59,7 +59,6 @@ if 'name' in st.session_state:
             outtweets = get_3200_tweets(st.session_state.name,st.session_state.api,st.session_state.client, 3200)
 
         try:
-            cat = outtweets[9]  
             st.markdown(f"We scraped {len(outtweets)} tweets from {st.session_state.name}.")
             
             with st.spinner(text='We\'re analyzing the tweets. Give it a sec...'):

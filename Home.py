@@ -1,6 +1,6 @@
 import streamlit as st
 from shillelagh.backends.apsw.db import connect
-from helper import load_lottieurl, insert_user_data
+from helper import *
 import datetime
 from uuid import uuid4
 
