@@ -20,7 +20,7 @@ with st.sidebar:
 st.title("😮 Language 😮")
 
 if 'conn' not in st.session_state:
-    st.warning("You can go to the homepage and add a different twitter handle.")
+    st.warning("We're analyzing tweets from the President of the United States (POTUS). You can go to the homepage and add a different twitter handle.")
 #elif 'df' not in st.session_state:
     #with st.spinner(text="In progress..."):
         #sheet_url = st.secrets["private_gsheets_url"]
@@ -41,7 +41,7 @@ if 'client' not in st.session_state:
 
 if 'name' not in st.session_state:
     st.session_state.name = "POTUS"
-    
+
 if 'name' in st.session_state:
     #try:
     outtweets = get_3200_tweets(st.session_state.name,st.session_state.api,st.session_state.client, 3200)
