@@ -51,16 +51,17 @@ if agree:
            """)
         st.markdown("You have consented.")
     
-    st.text_input("Enter a twitter username to begin", key="name", placeholder="e.g. POTUS")
+    st.text_input("Enter a twitter username to begin", key="name", placeholder="e.g. POTUS", value="POTUS")
     st.session_state.username_mine = st.radio(
             "I confirm that",
             ('This username belongs to me.', 'This username is belongs to someone else.')) 
+    
 
 
 st.session_state.submitted = False
 st.session_state.disable = True 
 
-if 'username_mine' in st.session_state and st.session_state.username_mine == 'This username belongs to me.' and agree:
+if 'username_mine' in st.session_state and st.sesion_state.name != "POTUS" and st.session_state.username_mine == 'This username belongs to me.' and agree:
     form_place = st.empty()
     with form_place.container():
         form = st.expander("Form",expanded=True)

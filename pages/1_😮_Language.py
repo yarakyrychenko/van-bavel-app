@@ -19,12 +19,12 @@ with st.sidebar:
 st.title("😮 Language 😮")
 
 if 'conn' not in st.session_state:
-    st.warning("Please go to the homepage and add a twitter username")
-elif 'df' not in st.session_state:
-    with st.spinner(text="In progress..."):
-        sheet_url = st.secrets["private_gsheets_url"]
-        query = f'SELECT * FROM "{sheet_url}"'
-        st.session_state.df = make_dataframe(st.session_state.conn.execute(query))
+    st.warning("You can go to the homepage and add a different twitter handle.")
+#elif 'df' not in st.session_state:
+    #with st.spinner(text="In progress..."):
+        #sheet_url = st.secrets["private_gsheets_url"]
+        #query = f'SELECT * FROM "{sheet_url}"'
+        #st.session_state.df = make_dataframe(st.session_state.conn.execute(query))
 
 if "all_stopwords" not in st.session_state:
      st.session_state.all_stopwords = make_worddict("dictionaries/all_stopwords.txt")
