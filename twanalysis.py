@@ -27,15 +27,14 @@ def get_user_tweeets(screen_name,api,n=200):
     outtweets = [tweet.text for tweet in alltweets] 
     return outtweets
 
-def get_3200_tweets(screen_name,api):
+def get_3200_tweets(screen_name,api,n_max=3200):
     client = tweepy.Client(bearer_token=st.secrets["bearer_token"])
     alltweets = [] 
     new_tweets = api.user_timeline(screen_name = screen_name,count=1)
     alltweets.extend(new_tweets)
     outtweets = [tweet.user.id for tweet in alltweets] 
-    tweets = client.get_users_tweets(id=outtweets[0], tweet_fields=['context_annotations','created_at','geo'])
+    tweets = client.get_users_tweets(id=outtweets[0], tweet_fields=['context_annotations','created_at','geo'], max_results=n_max)
     alltweets3200 = [tweet for tweet in tweets.data]
-    st.write(alltweets3200[0])
     return alltweets3200
 
 def preprocess(out):

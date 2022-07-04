@@ -38,7 +38,7 @@ if "api" not in st.session_state:
 
 if 'df' in st.session_state:
     #try:
-    outtweets = get_3200_tweets(st.session_state.name,st.session_state.api)
+    outtweets = get_3200_tweets(st.session_state.name,st.session_state.api,3200)
         #try:
     cat = outtweets[9]  
     st.markdown(f"We scraped {len(outtweets)} tweets from {st.session_state.name}.")
