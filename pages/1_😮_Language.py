@@ -38,9 +38,10 @@ if "api" not in st.session_state:
 
 if 'df' in st.session_state:
     #try:
-    outtweets = get_user_tweeets(st.session_state.name,st.session_state.api)
+    outtweets = get_3200_tweeets(st.session_state.name,st.session_state.api)
         #try:
     cat = outtweets[9]  
+    st.markdown(f"We scraped {len(outtweets)} tweets from {st.session_state.name}.")
             
     with st.spinner(text='We\'re analyzing the tweets. Give it a sec...'):
         figure, all_text = make_wordcloud(st.session_state.all_stopwords, outtweets)
