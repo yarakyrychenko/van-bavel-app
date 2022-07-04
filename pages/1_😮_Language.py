@@ -5,6 +5,7 @@ from shillelagh.backends.apsw.db import connect
 from twanalysis import *
 import tweepy
 from collections import Counter
+from streamlit_lottie import st_lottie
 
 st.set_page_config(
     page_title="Language",
@@ -12,8 +13,8 @@ st.set_page_config(
     layout="wide"
     )
 
-lottie_tweet = load_lottieurl('https://assets6.lottiefiles.com/packages/lf20_tnrzlN.json')
-st_lottie(lottie_tweet, speed=1, height=150, key="initial")
+lottie_lang= load_lottieurl('https://assets6.lottiefiles.com/packages/lf20_tnrzlN.json')
+st_lottie(lottie_lang, speed=1, height=150, key="initial")
 
 with st.sidebar:
     st.markdown("""👋 **Welcome!** Go to **Home** to enter a Twitter username. 

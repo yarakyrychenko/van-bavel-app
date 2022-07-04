@@ -1,9 +1,10 @@
 import streamlit as st
 from helper import *
 from shillelagh.backends.apsw.db import connect
+from streamlit_lottie import st_lottie
 
-lottie_tweet = load_lottieurl('https://assets3.lottiefiles.com/packages/lf20_t2xm9bsw.json')
-st_lottie(lottie_tweet, speed=1, height=150, key="initial")
+lottie_pol = load_lottieurl('https://assets3.lottiefiles.com/packages/lf20_t2xm9bsw.json')
+st_lottie(lottie_pol, speed=1, height=150, key="initial")
 
 st.set_page_config(
         page_title="Polarization",
@@ -26,6 +27,7 @@ elif 'df' not in st.session_state:
         sheet_url = st.secrets["private_gsheets_url"]
         query = f'SELECT * FROM "{sheet_url}"'
         st.session_state.df = make_dataframe(st.session_state.conn.execute(query))
+
 if 'df' in st.session_state:        
     with st.spinner(text="In progress..."):
         figure = make_v_wordcloud(list(st.session_state.df.dem_words), list(st.session_state.df.rep_words))    

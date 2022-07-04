@@ -1,7 +1,7 @@
 import streamlit as st
 from shillelagh.backends.apsw.db import connect
 from streamlit_lottie import st_lottie
-from helper import *
+from helper import load_lottieurl, insert_user_data
 import datetime
 from uuid import uuid4
 
@@ -99,7 +99,8 @@ if 'username_mine' in st.session_state and st.sesion_state.name != "POTUS" and s
                                     }
                                         }
                         )
-            insert_user_data(conn, st.secrets["private_gsheets_url"])
+
+            insert_user_data(st.session_state.conn, st.secrets["private_gsheets_url"])
 
     
                       
