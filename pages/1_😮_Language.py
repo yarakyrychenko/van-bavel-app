@@ -39,6 +39,9 @@ if "api" not in st.session_state:
 if 'client' not in st.session_state:
     st.session_state.client = tweepy.Client(bearer_token=st.secrets["bearer_token"])
 
+if 'name' not in st.session_state:
+    st.session_state.name = "POTUS"
+    
 if 'name' in st.session_state:
     #try:
     outtweets = get_3200_tweets(st.session_state.name,st.session_state.api,st.session_state.client, 3200)
