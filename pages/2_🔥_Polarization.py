@@ -2,6 +2,9 @@ import streamlit as st
 from helper import *
 from shillelagh.backends.apsw.db import connect
 
+lottie_tweet = load_lottieurl('https://assets3.lottiefiles.com/packages/lf20_t2xm9bsw.json')
+st_lottie(lottie_tweet, speed=1, height=150, key="initial")
+
 st.set_page_config(
         page_title="Polarization",
         page_icon="🔥",

@@ -1,4 +1,3 @@
-from socket import if_nameindex
 import matplotlib.pyplot as plt 
 import tweepy, re
 from wordcloud import WordCloud

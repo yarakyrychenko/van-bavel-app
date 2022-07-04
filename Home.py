@@ -1,7 +1,9 @@
 import streamlit as st
 from shillelagh.backends.apsw.db import connect
-import requests
 from streamlit_lottie import st_lottie
+from helper import *
+import datetime
+from uuid import uuid4
 
 st.set_page_config(
     page_title="Language and Identity on Twitter",
@@ -18,12 +20,6 @@ with st.sidebar:
     st.markdown("""👋 **Welcome!** Go to **Home** to enter a Twitter username. 
                 Then navigate to **Language** or **Polarization** to find out how your results. 
                 """)
-
-def load_lottieurl(url: str):
-    r = requests.get(url)
-    if r.status_code != 200:
-        return None
-    return r.json()
 
 lottie_tweet = load_lottieurl('https://assets2.lottiefiles.com/packages/lf20_MUGYrv.json')
 st_lottie(lottie_tweet, speed=1, height=200, key="initial")
@@ -103,7 +99,7 @@ if 'username_mine' in st.session_state and st.sesion_state.name != "POTUS" and s
                                     }
                                         }
                         )
-            #insert_user_data(conn, st.secrets["private_gsheets_url"])
+            insert_user_data(conn, st.secrets["private_gsheets_url"])
 
     
                       
