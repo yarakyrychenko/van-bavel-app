@@ -4,8 +4,14 @@ from helper import *
 from shillelagh.backends.apsw.db import connect
 from twanalysis import *
 import tweepy
-from collections import Counter
+
 from streamlit_lottie import st_lottie
+import requests
+def load_lottieurl(url):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
 
 st.set_page_config(
     page_title="Language",

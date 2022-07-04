@@ -3,6 +3,12 @@ from helper import *
 from shillelagh.backends.apsw.db import connect
 from streamlit_lottie import st_lottie
 
+import requests
+def load_lottieurl(url):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
 lottie_pol = load_lottieurl('https://assets3.lottiefiles.com/packages/lf20_t2xm9bsw.json')
 st_lottie(lottie_pol, speed=1, height=150, key="initial")
 
