@@ -19,12 +19,22 @@ def authenticate(consumer_key, consumer_secret,access_token_key, access_token_se
     api = tweepy.API(auth)
     return api
 
-def get_user_tweeets(screen_name,api):
-    #client = tweepy.Client(bearer_token=st.secrets["bearer_token"])
-    outtweets =[]
-    for status in tweepy.Cursor(api.user_timeline, screen_name=screen_name, tweet_mode="extended").items():
-        outtweets.append(status.full_text)
+
+def get_user_tweeets(screen_name,api,n=200):
+    alltweets = [] 
+    new_tweets = api.user_timeline(screen_name = screen_name,count=n)
+    alltweets.extend(new_tweets)
+    outtweets = [tweet.text for tweet in alltweets] 
     return outtweets
+
+def get_3200_tweets(screen_name,api):
+    client = tweepy.Client(bearer_token=st.secrets["bearer_token"])
+    alltweets = [] 
+    new_tweets = api.user_timeline(screen_name = screen_name,count=1)
+    alltweets.extend(new_tweets)
+    outtweets = [tweet.id for tweet in alltweets] 
+    tweets = client.get_users_tweets(id=outtweets[0], tweet_fields=['context_annotations','created_at','geo'])
+    return [tweet for tweet in tweets.data]
 
 def preprocess(out):
     text = " ".join(out)
@@ -44,13 +54,12 @@ def make_wordcloud(st_words, out):
     plt.axis("off")
     return fig, text
 
-def count_words(all_text,dict):
-    counter = Counter(all_text) 
+def count_words(all_text,dictionary):
+    counter = Counter(all_text.split()) 
     keys = counter.keys()
     total = 0
-    for word in dict:
+    for word in dictionary:
         word = word.split("*")[0]
         numbers = [counter[key] for key in keys if key.startswith(word)]
-        st.write(numbers)
         total += sum(numbers)
     return total

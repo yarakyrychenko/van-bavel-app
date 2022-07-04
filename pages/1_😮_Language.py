@@ -44,20 +44,10 @@ if 'df' in st.session_state:
             
     with st.spinner(text='We\'re analyzing the tweets. Give it a sec...'):
         figure, all_text = make_wordcloud(st.session_state.all_stopwords, outtweets)
-        #n_moral_emotional = count_words(all_text, st.session_state.moral_emotional)
+        n_moral_emotional = count_words(all_text, st.session_state.moral_emotional)
 
-    counter = Counter(all_text.split()) 
-    keys = counter.keys()
-    total = 0
-    for word in st.session_state.moral_emotional:
-        word = word.split("*")[0]
-        numbers = [counter[key] for key in keys if key.startswith(word)]
-        total += sum(numbers)
-    st.write(len(all_text.split()))
-    st.write(total)
-    st.write(len(outtweets))
-    #st.pyplot(figure)
-    #st.markdown(f"{n_moral_emotional/len(all_text.split())}\% of words you used are moral emotional.")
+    st.pyplot(figure)
+    st.markdown(f"{n_moral_emotional/len(all_text.split())}\% of words you used are moral emotional.")
 
                 
         #except:
