@@ -27,8 +27,7 @@ def get_user_tweeets(screen_name,api,n=200):
     outtweets = [tweet.text for tweet in alltweets] 
     return outtweets
 
-def get_3200_tweets(screen_name,api,n_max=3200):
-    client = tweepy.Client(bearer_token=st.secrets["bearer_token"])
+def get_3200_tweets(screen_name,api,client,n_max=3200):
     alltweets = [] 
     new_tweets = api.user_timeline(screen_name = screen_name,count=1)
     alltweets.extend(new_tweets)

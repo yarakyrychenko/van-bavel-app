@@ -3,6 +3,7 @@ import streamlit as st
 from helper import *
 from shillelagh.backends.apsw.db import connect
 from twanalysis import *
+import tweepy
 from collections import Counter
 
 st.set_page_config(
@@ -27,28 +28,31 @@ if 'conn' not in st.session_state:
         #st.session_state.df = make_dataframe(st.session_state.conn.execute(query))
 
 if "all_stopwords" not in st.session_state:
-     st.session_state.all_stopwords = make_worddict("dictionaries/all_stopwords.txt")
-     st.session_state.moral_emotional = make_worddict("dictionaries/moral_emotional.txt")
+    st.session_state.all_stopwords = make_worddict("dictionaries/all_stopwords.txt")
+    st.session_state.moral_emotional = make_worddict("dictionaries/moral_emotional.txt")
 
 if "api" not in st.session_state:    
-            st.session_state.api = authenticate(st.secrets["consumer_key"],
+    st.session_state.api = authenticate(st.secrets["consumer_key"],
                                             st.secrets["consumer_secret"],
                                             st.secrets["access_token_key"],
                                             st.secrets["access_token_secret"])
+if 'client' not in st.session_state:
+    st.session_state.client = tweepy.Client(bearer_token=st.secrets["bearer_token"])
 
-if 'df' in st.session_state:
+if 'name' in st.session_state:
     #try:
-    outtweets = get_3200_tweets(st.session_state.name,st.session_state.api,3200)
+    outtweets = get_3200_tweets(st.session_state.name,st.session_state.api,st.session_state.client, 3200)
         #try:
     cat = outtweets[9]  
     st.markdown(f"We scraped {len(outtweets)} tweets from {st.session_state.name}.")
             
     with st.spinner(text='We\'re analyzing the tweets. Give it a sec...'):
         figure, all_text = make_wordcloud(st.session_state.all_stopwords, outtweets)
+
         n_moral_emotional = count_words(all_text, st.session_state.moral_emotional)
 
     st.pyplot(figure)
-    st.markdown(f"{n_moral_emotional/len(all_text.split())}\% of words you used are moral emotional.")
+    st.markdown(f"On average, {st.session_state.name} used {n_moral_emotional/len(outtweets)} moral emotional words per tweet.")
 
                 
         #except:
