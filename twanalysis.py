@@ -35,9 +35,9 @@ def get_3200_tweets(screen_name,api,n_max=3200):
     outtweets = [tweet.user.id for tweet in alltweets] 
     alltweets3200 = tweepy.Paginator(client.get_users_tweets, id=outtweets[0], 
                             tweet_fields=['context_annotations','created_at'],max_results=100).flatten(limit=n_max)
-    st.write(len(alltweets3200))
-    return [tweet.text for tweet in alltweets3200]
-
+    tweetlist = [tweet.text for tweet in alltweets3200]
+    st.write(len(tweetlist))
+    return tweetlist
 def preprocess(out):
     text = " ".join(out)
     text = re.sub(pattern=r"http\S+",repl="",string=text.lower())
