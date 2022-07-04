@@ -56,7 +56,7 @@ if 'name' in st.session_state:
 
     try:
         with st.spinner("We\'re retrieving tweets."):
-            outtweets = get_3200_tweets(st.session_state.name,st.session_state.api,st.session_state.client, 3200)
+            outtweets = get_3200_tweets(st.session_state.name,st.session_state.api,st.session_state.client, 500)
 
         try:
             st.markdown(f"We scraped {len(outtweets)} tweets from {st.session_state.name}.")

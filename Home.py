@@ -32,7 +32,9 @@ lottie_tweet = load_lottieurl('https://assets2.lottiefiles.com/packages/lf20_MUG
 st_lottie(lottie_tweet, speed=1, height=200, key="initial")
 
 st.title("Language and Identity on Twitter") 
-st.subheader("See multiple linguistic Twitter analysis.")
+st.subheader("""
+    Find out what language you and others use on Twitter. 
+    Discover what the two parties think about each other and how polarized the US Twitter is.""")
 
 placeholder = st.empty()
 with placeholder.container():
@@ -126,7 +128,6 @@ if 'username_mine' in st.session_state and st.session_state.username_mine == 'Th
                 If you change your mind at any point, return to this page to enter your Twitter username.
                 """)
         st.success("Open the sidebar and navigate to **Language** or  **Polarization** to see your results.")
-
-
+    
 
 
