@@ -9,14 +9,16 @@ def load_lottieurl(url):
     if r.status_code != 200:
         return None
     return r.json()
-lottie_pol = load_lottieurl('https://assets3.lottiefiles.com/packages/lf20_t2xm9bsw.json')
-st_lottie(lottie_pol, speed=1, height=150, key="initial")
 
 st.set_page_config(
         page_title="Polarization",
         page_icon="🔥",
         layout="wide"
         )
+        
+lottie_pol = load_lottieurl('https://assets3.lottiefiles.com/packages/lf20_t2xm9bsw.json')
+st_lottie(lottie_pol, speed=1, height=150, key="initial")
+
 
 with st.sidebar:
     st.markdown("""👋 **Welcome!** Go to **Home** to enter a Twitter username. 
