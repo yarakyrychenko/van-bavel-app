@@ -35,7 +35,7 @@ def get_3200_tweets(screen_name,api,n_max=3200):
     outtweets = [tweet.user.id for tweet in alltweets] 
     alltweets3200 = []
     for status in client.get_users_tweets(id=outtweets[0], tweet_fields=['context_annotations','created_at','geo']):
-        alltweets3200.append(status.data)
+        alltweets3200.append(status)
     st.write(len(alltweets3200))
     return alltweets3200
 
