@@ -19,7 +19,7 @@ st.text_input("Enter a twitter username to begin", key="name")
 if "last_name" not in st.session_state:
         st.session_state.last_name = ""
 
-if st.session_state.last_name != st.session_state.name:     
+if False: #st.session_state.last_name != st.session_state.name:     
 
     st.session_state.username_mine = st.radio(
             "I confirm that",
