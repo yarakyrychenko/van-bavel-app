@@ -1,6 +1,6 @@
 import streamlit as st
 from helper import *
-import datetime
+from datetime import datetime
 from uuid import uuid4
 from streamlit_lottie import st_lottie
 import requests
