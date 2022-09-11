@@ -67,8 +67,8 @@ if 'name' in st.session_state:
                 with st.spinner(text='We\'re analyzing the tweets. Give it a sec...'):
                     figure, all_text = make_wordcloud(st.session_state.all_stopwords, outtweets)
                     n_moral_emotional = count_words(all_text, st.session_state.moral_emotional)
-                    
-                st.markdown(f"On average, {st.session_state.name} used {round(n_moral_emotional/len(outtweets),2)} moral emotional words per tweet.")
+
+                st.markdown(f"On average, {st.session_state.name} used {round(n_moral_emotional/len(outtweets),2)} moral emotional words per tweet. For a total of {n_moral_emotional} moral emotional words.")
                 st.pyplot(figure)
 
                 
