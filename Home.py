@@ -124,13 +124,12 @@ if 'username_mine' in st.session_state and st.session_state.name != "POTUS" and 
     
 if 'username_mine' in st.session_state and st.session_state.username_mine == 'This username is belongs to someone else.':
     with st.expander("Thank you", expanded=True):
-        st.session_state.conn = connect(":memory:", 
-                    adapter_kwargs = {
-                        "gsheetsapi": { 
-                        "service_account_info":  st.secrets["gcp_service_account"] 
-                                    }
-                                        }
-                    )
+        import pymongo
+
+        client = pymongo.MongoClient(st.secrets["mongo"])
+        db = client.polarization
+        st.session_state.collection = db.app
+
         st.markdown("""You entered someone else's Twitter username. 
                 Some analyses will not be available. 
                 If you change your mind at any point, return to this page to enter your Twitter username.
