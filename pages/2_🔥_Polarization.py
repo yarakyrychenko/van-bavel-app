@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 from helper import *
-from shillelagh.backends.apsw.db import connect
 from streamlit_lottie import st_lottie
 
 import requests
