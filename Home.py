@@ -116,7 +116,8 @@ if 'username_mine' in st.session_state and st.session_state.name != "POTUS" and 
                             "username_mine": st.session_state.username_mine 
                             }
                             
-            st.session_state.collection.insert_one(user_data)        
+            st.session_state.collection.insert_one(user_data)     
+            st.success("Open the sidebar and navigate to **Language** or  **Polarization** to see your results.")   
 
     
                       
