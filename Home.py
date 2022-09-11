@@ -1,11 +1,10 @@
 import streamlit as st
-from shillelagh.backends.apsw.db import connect
 from helper import *
 import datetime
 from uuid import uuid4
-
 from streamlit_lottie import st_lottie
 import requests
+
 def load_lottieurl(url):
     r = requests.get(url)
     if r.status_code != 200:
