@@ -60,7 +60,7 @@ if 'name' in st.session_state:
 
         try:
             st.markdown(f"We scraped {len(outtweets)} tweets from {st.session_state.name}.")
-            st.markdown(f"On average, {st.session_state.name} used {n_moral_emotional/len(outtweets)} moral emotional words per tweet.")
+            st.markdown(f"On average, {st.session_state.name} used {round(n_moral_emotional/len(outtweets),2)} moral emotional words per tweet.")
             
             with st.spinner(text='We\'re analyzing the tweets. Give it a sec...'):
                 figure, all_text = make_wordcloud(st.session_state.all_stopwords, outtweets)

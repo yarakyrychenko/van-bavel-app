@@ -102,7 +102,7 @@ if 'username_mine' in st.session_state and st.session_state.name != "POTUS" and 
     with st.expander("Thank you",expanded=True):
         if st.session_state.submitted:
             st.session_state.id = datetime.now().strftime('%Y%m-%d%H-%M-') + str(uuid4())
-            st.success("Thanks for submitting your answers!")
+            st.success("Thanks for submitting your answers! Open the sidebar and navigate to **Language** or  **Polarization** to see your results.")
             st.markdown(f"Your app ID is {st.session_state.id}. Note it down and email us if you want your answers deleted.") 
                         
             user_data = {
@@ -116,8 +116,7 @@ if 'username_mine' in st.session_state and st.session_state.name != "POTUS" and 
                             "username_mine": st.session_state.username_mine 
                             }
                             
-            st.session_state.collection.insert_one(user_data)     
-            st.success("Open the sidebar and navigate to **Language** or  **Polarization** to see your results.")   
+            st.session_state.collection.insert_one(user_data)        
 
     
                       
