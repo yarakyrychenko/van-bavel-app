@@ -29,7 +29,7 @@ with st.sidebar:
 
 st.title("😮 Language 😮")
 
-if 'conn' not in st.session_state:
+if 'collection' not in st.session_state:
     st.warning("We're analyzing tweets from the President of the United States (POTUS). You can go to the homepage and add a different twitter handle.")
 #elif 'df' not in st.session_state:
     #with st.spinner(text="In progress..."):

@@ -28,13 +28,16 @@ with st.sidebar:
 
 st.title("🔥 Polarization 🔥")
 
-if 'conn' not in st.session_state:
+if 'collection' not in st.session_state:
     st.warning("Please go to the homepage and add a twitter username")
 elif 'df' not in st.session_state:
     with st.spinner(text="In progress..."):
-        sheet_url = st.secrets["private_gsheets_url"]
-        query = f'SELECT * FROM "{sheet_url}"'
-        st.session_state.df = make_dataframe(st.session_state.conn.execute(query))
+        cols = ['_id', "id", "twitter_username", "party", "dem_words", "rep_words", "dem_temp", "rep_temp","username_mine"]
+        list1 = []
+        for row in st.session_state.collection.find():
+            list1.append(list(row.values()))
+        df = pd.DataFrame(list1, columns = cols)
+        st.session_state.df = df.drop(['_id',"id","twitter_username","username_mine"],axis=1)
 
 if 'df' in st.session_state:        
     with st.spinner(text="In progress..."):

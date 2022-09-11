@@ -62,11 +62,16 @@ if agree:
             ('This username belongs to me.', 'This username is belongs to someone else.')) 
     
 
-
 st.session_state.submitted = False
 st.session_state.disable = True 
 
-if 'username_mine' in st.session_state and st.sesion_state.name != "POTUS" and st.session_state.username_mine == 'This username belongs to me.' and agree:
+if 'username_mine' in st.session_state and st.session_state.name != "POTUS" and st.session_state.username_mine == 'This username belongs to me.' and agree:
+    import pymongo
+
+    client = pymongo.MongoClient(st.secrets["mongo"])
+    db = client.polarization
+    st.session_state.collection = db.app
+
     form_place = st.empty()
     with form_place.container():
         form = st.expander("Form",expanded=True)
@@ -101,15 +106,18 @@ if 'username_mine' in st.session_state and st.sesion_state.name != "POTUS" and s
             st.success("Thanks for submitting your answers!")
             st.markdown(f"Your app ID is {st.session_state.id}. Note it down and email us if you want your answers deleted.") 
                         
-            st.session_state.conn = connect(":memory:", 
-                            adapter_kwargs = {
-                            "gsheetsapi": { 
-                            "service_account_info":  st.secrets["gcp_service_account"] 
-                                    }
-                                        }
-                        )
-
-            insert_user_data(st.session_state.conn, st.secrets["private_gsheets_url"])
+            user_data = {
+                            "id": st.session_state.id, 
+                            "twitter_username": st.session_state.name, 
+                            "party": st.session_state.party, 
+                            "dem_words": st.session_state.dem_words, 
+                            "rep_words": st.session_state.rep_words, 
+                            "dem_temp": st.session_state.dem_temp,
+                            "rep_temp": st.session_state.rep_temp,
+                            "username_mine": st.session_state.username_mine 
+                            }
+                            
+            st.session_state.collection.insert_one(user_data)        
 
     
                       
