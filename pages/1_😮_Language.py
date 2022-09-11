@@ -55,18 +55,21 @@ if 'name' not in st.session_state:
 if 'name' in st.session_state:
 
     try:
+        next = False
         with st.spinner("We\'re retrieving tweets."):
             outtweets = get_3200_tweets(st.session_state.name,st.session_state.api,st.session_state.client, 500)
+            next = True 
 
         try:
-            st.markdown(f"We scraped {len(outtweets)} tweets from {st.session_state.name}.")
-            st.markdown(f"On average, {st.session_state.name} used {round(n_moral_emotional/len(outtweets),2)} moral emotional words per tweet.")
+            if next:
+                st.markdown(f"We scraped {len(outtweets)} tweets from {st.session_state.name}.")
+                st.markdown(f"On average, {st.session_state.name} used {round(n_moral_emotional/len(outtweets),2)} moral emotional words per tweet.")
             
-            with st.spinner(text='We\'re analyzing the tweets. Give it a sec...'):
-                figure, all_text = make_wordcloud(st.session_state.all_stopwords, outtweets)
-                n_moral_emotional = count_words(all_text, st.session_state.moral_emotional)
+                with st.spinner(text='We\'re analyzing the tweets. Give it a sec...'):
+                    figure, all_text = make_wordcloud(st.session_state.all_stopwords, outtweets)
+                    n_moral_emotional = count_words(all_text, st.session_state.moral_emotional)
 
-            st.pyplot(figure)
+                st.pyplot(figure)
 
                 
         except:
