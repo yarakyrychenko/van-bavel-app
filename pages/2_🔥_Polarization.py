@@ -44,14 +44,14 @@ if 'df' in st.session_state:
     with st.spinner(text="In progress..."):
         figure = make_v_wordcloud(list(st.session_state.df.dem_words), list(st.session_state.df.rep_words))    
         
-    st.markdown(f"#### Here is how {str(len(st.session_state.df))} people who filled out this app describe the two parties.")
-    st.pyplot(figure)
+    st.markdown(f"#### Here is how the {str(len(st.session_state.df))} people who filled out this app describe and feel about the two parties.")
 
     group_means = st.session_state.df.groupby("party").agg('mean')
-    st.markdown(f"On average, Republicans who filled out this app feel {round(group_means.loc['Republican','dem_temp'],2)} towards Democrats. Democrats who filled out this app feel {round(group_means.loc['Democrat','rep_temp'])} towards Republicans.")
+    st.markdown(f"On average, Republicans who filled out this app feel {round(group_means.loc['Republican','dem_temp'],2)}/100 towards Democrats. Democrats who filled out this app feel {round(group_means.loc['Democrat','rep_temp'])}/100 towards Republicans.")
         
-    st.markdown(f"In contrast, Republicans feel {round(group_means.loc['Republican','rep_temp'])} towards fellow Republicans. And Democrats feel {round(group_means.loc['Democrat','dem_temp'],2)} towards fellow Democrats.")
-      
+    st.markdown(f"In contrast, Republicans feel {round(group_means.loc['Republican','rep_temp'])}/100 towards fellow Republicans. And Democrats feel {round(group_means.loc['Democrat','dem_temp'],2)}/100 towards fellow Democrats.")
+    
+    st.pyplot(figure)
   
     #make_twitter_button()
 
